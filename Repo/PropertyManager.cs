@@ -19,6 +19,7 @@ namespace tinder4apartment.Repo
         {
             if (property != null)
             {
+              
                 _db.OnSaleProperties.Add(property);
                 await _db.SaveChangesAsync();
 
@@ -70,5 +71,7 @@ namespace tinder4apartment.Repo
         {
             return await _db.RentalProperties.Where(m => m.ProviderName.ToLower().Equals(providerName.ToLower())).ToListAsync();
         }
+
+      
     }
 }
