@@ -29,5 +29,7 @@ namespace tinder4apartment.Models
         public string ImageLink3 { get; set; }
 
         public bool IsActive { get; set; }
+
+        
     }
 }

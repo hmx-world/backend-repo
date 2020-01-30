@@ -19,7 +19,7 @@ namespace tinder4apartment.Repo
         {
             if (property != null)
             {
-              
+                property.IsActive = true;
                 _db.OnSaleProperties.Add(property);
                 await _db.SaveChangesAsync();
 
@@ -33,6 +33,7 @@ namespace tinder4apartment.Repo
         {
              if (property != null)
             {
+                property.IsActive = true;
                 _db.RentalProperties.Add(property);
                 await _db.SaveChangesAsync();
 
@@ -52,14 +53,44 @@ namespace tinder4apartment.Repo
             return await _db.RentalProperties.FirstOrDefaultAsync(m=> m.Id == id);
         }
 
-        public async Task<List<OnSaleProperty>> GetAllOnSaleProperty()
+        public async Task<List<OnSaleProperty>> GetAllActiveOnSaleProperty()
         {
-            return await _db.OnSaleProperties.ToListAsync();
+            return await _db.OnSaleProperties.Where(m => m.IsActive == true).ToListAsync();
         }
 
-        public async Task<List<OnSaleProperty>> GetOnSalePropertyByProvider(string providerName)
+        public async Task<List<OnSaleProperty>> GetActiveOnSalePropertyByProvider(string providerName)
         {
-            return await _db.OnSaleProperties.Where(m => m.ProviderName.ToLower().Equals(providerName.ToLower())).ToListAsync();
+            return await _db.OnSaleProperties.Where(m => m.ProviderName.ToLower().Equals(providerName.ToLower()) && m.IsActive == true).ToListAsync();
+        }
+
+        public async Task<List<RentalProperty>> GetAllActiveRentalProperty()
+        {
+            return await _db.RentalProperties.Where(m => m.IsActive == true).ToListAsync();
+        }
+
+        public async Task<List<RentalProperty>> GetActiveRentalPropertyByProvider(string providerName)
+        {
+            return await _db.RentalProperties.Where(m => m.ProviderName.ToLower().Equals(providerName.ToLower()) && m.IsActive == true ).ToListAsync();
+        }
+
+        public void DeactivateProperty(int id, string mode)
+        {
+            switch (mode)
+            {
+                case "rental":
+                    var rental =  _db.RentalProperties.FirstOrDefault(m => m.Id == id);
+                    rental.IsActive = false;
+                    _db.SaveChanges();
+                    break;
+                
+                case "onsale":
+                    var onsale = _db.OnSaleProperties.FirstOrDefault(m=> m.Id == id);
+                    onsale.IsActive = false;
+                    _db.SaveChanges();
+                    break;
+                default:
+                    break;
+            }
         }
 
         public async Task<List<RentalProperty>> GetAllRentalProperty()
@@ -67,11 +98,19 @@ namespace tinder4apartment.Repo
             return await _db.RentalProperties.ToListAsync();
         }
 
+        public async Task<List<OnSaleProperty>> GetAllOnSaleProperty()
+        {
+            return await _db.OnSaleProperties.ToListAsync();
+        }
+
         public async Task<List<RentalProperty>> GetRentalPropertyByProvider(string providerName)
         {
             return await _db.RentalProperties.Where(m => m.ProviderName.ToLower().Equals(providerName.ToLower())).ToListAsync();
         }
 
-      
+        public async Task<List<OnSaleProperty>> GetOnSalePropertyByProvider(string providerName)
+        {
+            return await _db.OnSaleProperties.Where(m => m.ProviderName.ToLower().Equals(providerName.ToLower())).ToListAsync();
+        }
     }
 }

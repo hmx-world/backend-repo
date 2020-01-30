@@ -37,6 +37,7 @@ namespace tinder4apartment
 
 
             services.AddScoped<IPropertyManager, PropertyManager>();
+            services.AddScoped<IMatchRepo, MatchRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
