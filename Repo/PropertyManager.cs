@@ -88,6 +88,12 @@ namespace tinder4apartment.Repo
                     onsale.IsActive = false;
                     _db.SaveChanges();
                     break;
+                
+                case "industrial":
+                    var industrial = _db.IndustrialProperties.FirstOrDefault(m=> m.Id == id);
+                    industrial.IsActive = false;
+                    _db.SaveChanges();
+                    break;
                 default:
                     break;
             }
@@ -111,6 +117,45 @@ namespace tinder4apartment.Repo
         public async Task<List<OnSaleProperty>> GetOnSalePropertyByProvider(string providerName)
         {
             return await _db.OnSaleProperties.Where(m => m.ProviderName.ToLower().Equals(providerName.ToLower())).ToListAsync();
+        }
+
+        public async Task<IndustrialProperty> AddIndustrialProperty(IndustrialProperty property)
+        {
+             if (property != null)
+            {
+                property.IsActive = true;
+                _db.IndustrialProperties.Add(property);
+                await _db.SaveChangesAsync();
+
+                return property;
+            }
+
+            return null;
+        }
+
+        public async Task<List<IndustrialProperty>> GetIndustrialProperty()
+        {
+            return await _db.IndustrialProperties.ToListAsync();
+        }
+
+        public async Task<List<IndustrialProperty>> GetIndustrialPropertyByProvider(string provider)
+        {
+            return await _db.IndustrialProperties.Where(m => m.ProviderName.ToLower() == provider.ToLower()).ToListAsync();
+        }
+
+        public async Task<IndustrialProperty> GetOneIndustrialProperty(int id)
+        {
+            return await _db.IndustrialProperties.FirstOrDefaultAsync(m => m.Id == id);
+        }
+
+        public async Task<List<IndustrialProperty>> GetActiveIndustrialProperty()
+        {
+            return await _db.IndustrialProperties.Where(m => m.IsActive == true).ToListAsync();
+        }
+
+        public async Task<List<IndustrialProperty>> GetActiveIndustrialPropertyByProvider(string provider)
+        {
+            return await _db.IndustrialProperties.Where(m => m.ProviderName.ToLower() == provider.ToLower() && m.IsActive == true).ToListAsync();
         }
     }
 }

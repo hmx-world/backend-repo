@@ -9,5 +9,8 @@ namespace tinder4apartment.Repo
         List<RentalPropertyIndex> MatchRentalProperty(UserQuery query, List<RentalProperty> rentals);
 
         List<OnSalePropertyIndex> MatchOnSaleProperty(UserQuery query, List<OnSaleProperty> onsale);
+
+
+        List<IndustrialPropertyIndex> MatchIndustrialProperty(IndustrialQuery query, Mode mode, List<IndustrialProperty> industrials);
     }
 }

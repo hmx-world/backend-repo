@@ -27,8 +27,19 @@ namespace tinder4apartment.Repo {
 
         Task<List<RentalProperty>> GetRentalPropertyByProvider (string providerName);
         Task<List<OnSaleProperty>> GetOnSalePropertyByProvider (string providerName);
-        
 
+
+
+        Task<IndustrialProperty> AddIndustrialProperty(IndustrialProperty property);
+        Task<List<IndustrialProperty>> GetIndustrialProperty();
+        Task<List<IndustrialProperty>> GetIndustrialPropertyByProvider(string provider);
+        Task<IndustrialProperty> GetOneIndustrialProperty (int id);
+
+
+        Task<List<IndustrialProperty>> GetActiveIndustrialProperty();
+
+        Task<List<IndustrialProperty>> GetActiveIndustrialPropertyByProvider(string provider);
+    
 
    
     }

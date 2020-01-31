@@ -7,6 +7,96 @@ namespace tinder4apartment.Repo
 {
     public class MatchRepo : IMatchRepo
     {
+        public List<IndustrialPropertyIndex> MatchIndustrialProperty(IndustrialQuery query, Mode mode, List<IndustrialProperty> industrials)
+        {
+            List<IndustrialPropertyIndex> indexedPropertyList = new List<IndustrialPropertyIndex>();
+
+            switch (mode)
+            {
+                case Mode.Rent:
+                    industrials = industrials.Where( m => m.Mode == Mode.Rent).ToList();
+                    industrials = industrials.Where( m => m.State == query.State).ToList();
+
+                    foreach (var item in industrials)
+                    {
+                        int roomPoint = RoomRank(item.NumberOfBedrooms, query.NumberOfRooms);
+                        var propertyIndex = new IndustrialPropertyIndex(){
+                            Id = item.Id,
+                            ImageLink1 = item.ImageLink1,
+                            ImageLink2 = item.ImageLink2,
+                            ImageLink3 = item.ImageLink3,
+                            City = item.City,
+                            State = item.State,
+                            Name = item.Name,
+                            ProviderName = item.ProviderName,
+                            Price = item.Price,
+                            ParkingSpace = item.ParkingSpace,
+                            Area = item.Area,
+                            Mode = item.Mode,
+                            NumberOfBedrooms = item.NumberOfBedrooms,
+                            NeighbourhoodSecurity = item.NeighbourhoodSecurity,
+                            Extras = item.Extras,
+                            BuildingType = item.BuildingType,
+                            IsActive = item.IsActive
+                        };
+                        
+                        propertyIndex.Rank = roomPoint;
+
+                        if (item.City == query.City)
+                        {
+                            propertyIndex.Rank = propertyIndex.Rank +3;
+                        }
+
+                        indexedPropertyList.Add(propertyIndex);
+                    }
+
+                    return indexedPropertyList;
+
+                case Mode.Sale:
+                    industrials = industrials.Where( m => m.Mode == Mode.Sale).ToList();
+                    industrials = industrials.Where( m => m.State == query.State).ToList();
+
+                    foreach (var item in industrials)
+                    {
+                        int roomPoint = RoomRank(item.NumberOfBedrooms, query.NumberOfRooms);
+                        var propertyIndex = new IndustrialPropertyIndex(){
+                            Id = item.Id,
+                            ImageLink1 = item.ImageLink1,
+                            ImageLink2 = item.ImageLink2,
+                            ImageLink3 = item.ImageLink3,
+                            City = item.City,
+                            State = item.State,
+                            Name = item.Name,
+                            ProviderName = item.ProviderName,
+                            Price = item.Price,
+                            ParkingSpace = item.ParkingSpace,
+                            Area = item.Area,
+                            Mode = item.Mode,
+                            NumberOfBedrooms = item.NumberOfBedrooms,
+                            NeighbourhoodSecurity = item.NeighbourhoodSecurity,
+                            Extras = item.Extras,
+                            BuildingType = item.BuildingType,
+                            IsActive = item.IsActive
+                        };
+                        
+                        propertyIndex.Rank = roomPoint;
+
+                        if (item.City == query.City)
+                        {
+                            propertyIndex.Rank = propertyIndex.Rank +3;
+                        }
+
+                        indexedPropertyList.Add(propertyIndex);
+                    }
+
+                    return indexedPropertyList;
+                default:
+                    break;
+            }
+
+            return null;
+        }
+
         public List<OnSalePropertyIndex> MatchOnSaleProperty(UserQuery query, List<OnSaleProperty> onsale)
         {
             List<OnSalePropertyIndex> indexedPropertyList = new List<OnSalePropertyIndex>();
@@ -160,6 +250,11 @@ namespace tinder4apartment.Repo
 
 
     public class OnSalePropertyIndex: OnSaleProperty
+    {
+        public int Rank { get; set; }
+    }
+
+    public class IndustrialPropertyIndex: IndustrialProperty
     {
         public int Rank { get; set; }
     }

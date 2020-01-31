@@ -101,5 +101,38 @@ namespace tinder4apartment.Controllers
             return Ok();
         }
 
+
+        [HttpGet("industrialProperty/all")]
+        public async Task<IActionResult> GetIndustrialProperty()
+        {
+            return Ok (await _manager.GetIndustrialProperty());
+        }
+
+        [HttpGet("industrialProperty/{provider}/provider")]
+        public async Task<IActionResult> GetIndustrialPropertyByProvider([FromRoute]string provider)
+        {
+            return Ok (await _manager.GetIndustrialPropertyByProvider(provider));
+        }
+
+        
+
+        [HttpPost("industrialProperty")]
+        public async Task<IActionResult> AddIndustrialProperty([FromBody]IndustrialProperty property)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _manager.AddIndustrialProperty(property);
+            if (result != null)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest("Request is null");
+        }
+
+
     }
 }
