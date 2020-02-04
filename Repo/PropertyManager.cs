@@ -157,5 +157,8 @@ namespace tinder4apartment.Repo
         {
             return await _db.IndustrialProperties.Where(m => m.ProviderName.ToLower() == provider.ToLower() && m.IsActive == true).ToListAsync();
         }
+
+
+        
     }
 }

@@ -40,7 +40,7 @@ namespace tinder4apartment.Repo {
 
         Task<List<IndustrialProperty>> GetActiveIndustrialPropertyByProvider(string provider);
     
-
+        
    
     }
 }

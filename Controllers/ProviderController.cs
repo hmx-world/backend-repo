@@ -101,14 +101,21 @@ namespace tinder4apartment.Controllers
             return Ok();
         }
 
+         [HttpGet("industrial/{id}/deactivate")]
+        public IActionResult DeactivateIndustrialProperty([FromRoute]int id)
+        {
+            _manager.DeactivateProperty(id, "industrial");
+            return Ok();
+        }
 
-        [HttpGet("industrialProperty/all")]
+
+        [HttpGet("industrial/all")]
         public async Task<IActionResult> GetIndustrialProperty()
         {
             return Ok (await _manager.GetIndustrialProperty());
         }
 
-        [HttpGet("industrialProperty/{provider}/provider")]
+        [HttpGet("industrial/{provider}/provider")]
         public async Task<IActionResult> GetIndustrialPropertyByProvider([FromRoute]string provider)
         {
             return Ok (await _manager.GetIndustrialPropertyByProvider(provider));
@@ -116,7 +123,7 @@ namespace tinder4apartment.Controllers
 
         
 
-        [HttpPost("industrialProperty")]
+        [HttpPost("industrial")]
         public async Task<IActionResult> AddIndustrialProperty([FromBody]IndustrialProperty property)
         {
             if (!ModelState.IsValid)
