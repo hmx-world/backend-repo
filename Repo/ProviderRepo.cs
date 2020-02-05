@@ -47,14 +47,20 @@ namespace tinder4apartment.Repo
         {
             var details = await _db.ProviderModels.FirstOrDefaultAsync(m=> m.LoginId == provider.LoginId);
 
-            if (!VerifyPassword(provider.Password, details.PasswordHash, details.PasswordSalt))
+            if (details != null)
             {
-                return null;
-            }
-            
-            string result = "login successful";
+                if (!VerifyPassword(provider.Password, details.PasswordHash, details.PasswordSalt))
+                {
+                    return null;
+                }
+                
+                string result = "login successful";
 
-            return result;
+                return result;
+            }
+
+            return null;
+            
         }
 
 
