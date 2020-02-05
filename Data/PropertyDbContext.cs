@@ -13,6 +13,7 @@ namespace tinder4apartment.Data
         public DbSet<OnSaleProperty> OnSaleProperties {get; set;}  
         
         public DbSet<IndustrialProperty> IndustrialProperties {get; set;}
+        public DbSet<ProviderModel> ProviderModels {get; set;}
       
     }
 }

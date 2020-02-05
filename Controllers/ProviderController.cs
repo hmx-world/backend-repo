@@ -12,24 +12,14 @@ namespace tinder4apartment.Controllers
     public class ProviderController : ControllerBase
     {
         private readonly IPropertyManager _manager;
-
-        public ProviderController(IPropertyManager manager)
+        private readonly IProviderRepo _login;
+        public ProviderController(IPropertyManager manager, IProviderRepo login)
         {
             _manager = manager;
+            _login = login;
         }
 
 
-        [HttpGet("rental/all")]
-        public async Task<IActionResult> GetAllRentalProperties()
-        {
-            return Ok(await _manager.GetAllRentalProperty());
-        }
-
-        [HttpGet("onsale/all")]
-        public async Task<IActionResult> GetAllOnSaleProperties()
-        {
-            return Ok(await _manager.GetAllOnSaleProperty());
-        }
         
          [HttpGet("rental/{provider}/provider")]
         public async Task<IActionResult> GetRentalPropertyByProvider([FromRoute]string provider)
@@ -109,11 +99,7 @@ namespace tinder4apartment.Controllers
         }
 
 
-        [HttpGet("industrial/all")]
-        public async Task<IActionResult> GetIndustrialProperty()
-        {
-            return Ok (await _manager.GetIndustrialProperty());
-        }
+      
 
         [HttpGet("industrial/{provider}/provider")]
         public async Task<IActionResult> GetIndustrialPropertyByProvider([FromRoute]string provider)
@@ -138,6 +124,23 @@ namespace tinder4apartment.Controllers
             }
 
             return BadRequest("Request is null");
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody]ProviderLoginDto loginDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _login.ProviderLogin(loginDto);
+            if (result != null)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest("Login failed");
         }
 
 
