@@ -99,7 +99,7 @@ namespace tinder4apartment.Repo
 
         public List<OnSalePropertyIndex> MatchOnSaleProperty(UserQuery query, List<OnSaleProperty> onsale)
         {
-            List<OnSalePropertyIndex> indexedPropertyList = new List<OnSalePropertyIndex>();
+           List<OnSalePropertyIndex> indexedPropertyList = new List<OnSalePropertyIndex>();
 
             onsale = onsale.Where(m => m.State == query.State).ToList();
 
