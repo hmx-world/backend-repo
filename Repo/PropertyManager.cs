@@ -58,9 +58,9 @@ namespace tinder4apartment.Repo
             return await _db.OnSaleProperties.Where(m => m.IsActive == true).ToListAsync();
         }
 
-        public async Task<List<OnSaleProperty>> GetActiveOnSalePropertyByProvider(string providerName)
+        public async Task<List<OnSaleProperty>> GetActiveOnSalePropertyByProvider(int providerId)
         {
-            return await _db.OnSaleProperties.Where(m => m.ProviderName.ToLower().Equals(providerName.ToLower()) && m.IsActive == true).ToListAsync();
+            return await _db.OnSaleProperties.Where(m => m.ProviderModelId == providerId && m.IsActive == true).ToListAsync();
         }
 
         public async Task<List<RentalProperty>> GetAllActiveRentalProperty()
@@ -68,9 +68,9 @@ namespace tinder4apartment.Repo
             return await _db.RentalProperties.Where(m => m.IsActive == true).ToListAsync();
         }
 
-        public async Task<List<RentalProperty>> GetActiveRentalPropertyByProvider(string providerName)
+        public async Task<List<RentalProperty>> GetActiveRentalPropertyByProvider(int providerId)
         {
-            return await _db.RentalProperties.Where(m => m.ProviderName.ToLower().Equals(providerName.ToLower()) && m.IsActive == true ).ToListAsync();
+            return await _db.RentalProperties.Where(m => m.ProviderModelId == providerId && m.IsActive == true ).ToListAsync();
         }
 
         public void DeactivateProperty(int id, string mode)
@@ -109,14 +109,14 @@ namespace tinder4apartment.Repo
             return await _db.OnSaleProperties.ToListAsync();
         }
 
-        public async Task<List<RentalProperty>> GetRentalPropertyByProvider(string providerName)
+        public async Task<List<RentalProperty>> GetRentalPropertyByProvider(int providerId)
         {
-            return await _db.RentalProperties.Where(m => m.ProviderName.ToLower().Equals(providerName.ToLower())).ToListAsync();
+            return await _db.RentalProperties.Where(m => m.ProviderModelId== providerId).ToListAsync();
         }
 
-        public async Task<List<OnSaleProperty>> GetOnSalePropertyByProvider(string providerName)
+        public async Task<List<OnSaleProperty>> GetOnSalePropertyByProvider(int providerId)
         {
-            return await _db.OnSaleProperties.Where(m => m.ProviderName.ToLower().Equals(providerName.ToLower())).ToListAsync();
+            return await _db.OnSaleProperties.Where(m => m.ProviderModelId == providerId).ToListAsync();
         }
 
         public async Task<IndustrialProperty> AddIndustrialProperty(IndustrialProperty property)
@@ -138,9 +138,9 @@ namespace tinder4apartment.Repo
             return await _db.IndustrialProperties.ToListAsync();
         }
 
-        public async Task<List<IndustrialProperty>> GetIndustrialPropertyByProvider(string provider)
+        public async Task<List<IndustrialProperty>> GetIndustrialPropertyByProvider(int providerId)
         {
-            return await _db.IndustrialProperties.Where(m => m.ProviderName.ToLower() == provider.ToLower()).ToListAsync();
+            return await _db.IndustrialProperties.Where(m => m.ProviderModelId == providerId).ToListAsync();
         }
 
         public async Task<IndustrialProperty> GetOneIndustrialProperty(int id)
@@ -153,12 +153,11 @@ namespace tinder4apartment.Repo
             return await _db.IndustrialProperties.Where(m => m.IsActive == true).ToListAsync();
         }
 
-        public async Task<List<IndustrialProperty>> GetActiveIndustrialPropertyByProvider(string provider)
+        public async Task<List<IndustrialProperty>> GetActiveIndustrialPropertyByProvider(int providerId)
         {
-            return await _db.IndustrialProperties.Where(m => m.ProviderName.ToLower() == provider.ToLower() && m.IsActive == true).ToListAsync();
+            return await _db.IndustrialProperties.Where(m => m.ProviderModelId == providerId && m.IsActive == true).ToListAsync();
         }
 
-
-        
+      
     }
 }

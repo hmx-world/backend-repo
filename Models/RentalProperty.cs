@@ -10,6 +10,8 @@ namespace tinder4apartment.Models
         public int Light24hours { get; set; }
          [Required]
         public bool WaterSupply { get; set; }
-       
+
+        public virtual ProviderModel ProviderModel { get; set; }
+        public int ProviderModelId { get; set; }
     }
 }

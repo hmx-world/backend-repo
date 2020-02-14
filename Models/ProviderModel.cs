@@ -19,7 +19,7 @@ namespace tinder4apartment.Models
         public IList<OnSaleProperty> OnSaleProperties {get; set;} 
         public IList<RentalProperty> RentalProperties {get; set;}
         public IList<IndustrialProperty> MyProperty { get; set; }
-
+        
 
         public string LoginId {get; set;}
     }

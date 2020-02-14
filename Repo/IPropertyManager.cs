@@ -15,8 +15,7 @@ namespace tinder4apartment.Repo {
 
         Task<List<OnSaleProperty>> GetAllActiveOnSaleProperty ();
 
-        Task<List<RentalProperty>> GetActiveRentalPropertyByProvider (string providerName);
-        Task<List<OnSaleProperty>> GetActiveOnSalePropertyByProvider (string providerName);
+       
 
         void DeactivateProperty(int id, string mode);
 
@@ -25,20 +24,22 @@ namespace tinder4apartment.Repo {
 
         Task<List<OnSaleProperty>> GetAllOnSaleProperty ();
 
-        Task<List<RentalProperty>> GetRentalPropertyByProvider (string providerName);
-        Task<List<OnSaleProperty>> GetOnSalePropertyByProvider (string providerName);
-
-
+        Task<List<RentalProperty>> GetActiveRentalPropertyByProvider (int providerId);
+        Task<List<OnSaleProperty>> GetActiveOnSalePropertyByProvider (int providerId);
+        Task<List<RentalProperty>> GetRentalPropertyByProvider (int providerId);
+        Task<List<OnSaleProperty>> GetOnSalePropertyByProvider (int providerId);
+         Task<List<IndustrialProperty>> GetIndustrialPropertyByProvider(int providerId);
+          Task<List<IndustrialProperty>> GetActiveIndustrialPropertyByProvider(int providerId);
 
         Task<IndustrialProperty> AddIndustrialProperty(IndustrialProperty property);
         Task<List<IndustrialProperty>> GetIndustrialProperty();
-        Task<List<IndustrialProperty>> GetIndustrialPropertyByProvider(string provider);
+       
         Task<IndustrialProperty> GetOneIndustrialProperty (int id);
 
 
         Task<List<IndustrialProperty>> GetActiveIndustrialProperty();
 
-        Task<List<IndustrialProperty>> GetActiveIndustrialPropertyByProvider(string provider);
+       
     
         
    

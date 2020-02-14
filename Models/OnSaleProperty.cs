@@ -8,5 +8,8 @@ namespace tinder4apartment.Models
         public string  Title { get; set; }
         public string SiteDescription { get; set; }
 
+        public ProviderModel ProviderModel { get; set; }
+        public int ProviderModelId { get; set; }
+
     }
 }

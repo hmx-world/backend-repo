@@ -22,23 +22,15 @@ namespace tinder4apartment.Controllers
 
         
          [HttpGet("rental/{provider}/provider")]
-        public async Task<IActionResult> GetRentalPropertyByProvider([FromRoute]string provider)
+        public async Task<IActionResult> GetRentalPropertyByProvider([FromRoute]int providerId)
         {
-             if (provider == null)
-            {
-                return BadRequest("Provide an providername");
-            }
-            return Ok(await _manager.GetRentalPropertyByProvider(provider));
+            return Ok(await _manager.GetRentalPropertyByProvider(providerId));
         }
 
         [HttpGet("onsale/{provider}/provider")]
-        public async Task<IActionResult> GetOnSalePropertyByProvider([FromRoute]string provider)
+        public async Task<IActionResult> GetOnSalePropertyByProvider([FromRoute]int providerId)
         {
-              if (provider == null)
-            {
-                return BadRequest("Provide an providername");
-            }
-            return Ok(await _manager.GetOnSalePropertyByProvider(provider));
+            return Ok(await _manager.GetOnSalePropertyByProvider(providerId));
         }
 
         
@@ -102,9 +94,9 @@ namespace tinder4apartment.Controllers
       
 
         [HttpGet("industrial/{provider}/provider")]
-        public async Task<IActionResult> GetIndustrialPropertyByProvider([FromRoute]string provider)
+        public async Task<IActionResult> GetIndustrialPropertyByProvider([FromRoute]int providerId)
         {
-            return Ok (await _manager.GetIndustrialPropertyByProvider(provider));
+            return Ok (await _manager.GetIndustrialPropertyByProvider(providerId));
         }
 
         

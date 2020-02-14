@@ -51,30 +51,30 @@ namespace tinder4apartment.Controllers
         }
 
         [HttpGet("active/rental/{provider}/provider")]
-        public async Task<IActionResult> GetActiveRentalPropertyByProvider([FromRoute]string provider)
+        public async Task<IActionResult> GetActiveRentalPropertyByProvider([FromRoute]int? providerId)
         {
-             if (provider == null)
+             if (providerId == null)
             {
                 return BadRequest("Provide an providername");
             }
-            return Ok(await _manager.GetActiveRentalPropertyByProvider(provider));
+            return Ok(await _manager.GetActiveRentalPropertyByProvider((int)providerId));
         }
 
         [HttpGet("active/onsale/{provider}/provider")]
-        public async Task<IActionResult> GetActiveOnSalePropertyByProvider([FromRoute]string provider)
+        public async Task<IActionResult> GetActiveOnSalePropertyByProvider([FromRoute]int? providerId)
         {
-              if (provider == null)
+              if (providerId == null)
             {
                 return BadRequest("Provide an providername");
             }
-            return Ok(await _manager.GetActiveOnSalePropertyByProvider(provider));
+            return Ok(await _manager.GetActiveOnSalePropertyByProvider((int)providerId));
         }
 
 
         [HttpPost("active/rental/match/{providerName}")]
-        public async Task<IActionResult> MatchRentalPropertyByProvider([FromRoute]string providerName, [FromBody]UserQuery query)
+        public async Task<IActionResult> MatchRentalPropertyByProvider([FromRoute]int providerId, [FromBody]UserQuery query)
         {
-            var propertyList = await _manager.GetActiveRentalPropertyByProvider(providerName);
+            var propertyList = await _manager.GetActiveRentalPropertyByProvider(providerId);
 
             var result = _match.MatchRentalProperty(query, propertyList);
 
@@ -82,9 +82,9 @@ namespace tinder4apartment.Controllers
         }
 
         [HttpPost("active/onsale/match/{providerName}")]
-        public async Task<IActionResult> MatchOnSalePropertyByProvider([FromRoute]string providerName, [FromBody]UserQuery query)
+        public async Task<IActionResult> MatchOnSalePropertyByProvider([FromRoute]int providerId, [FromBody]UserQuery query)
         {
-            var propertyList = await _manager.GetActiveOnSalePropertyByProvider(providerName);
+            var propertyList = await _manager.GetActiveOnSalePropertyByProvider(providerId);
 
             var result = _match.MatchOnSaleProperty(query, propertyList);
 
@@ -122,9 +122,9 @@ namespace tinder4apartment.Controllers
         }
 
         [HttpGet("active/industrial/{provider}/provider")]
-        public async Task<IActionResult> GetIndustrialPropertyByProvider([FromRoute]string provider)
+        public async Task<IActionResult> GetIndustrialPropertyByProvider([FromRoute]int providerId)
         {
-            return Ok (await _manager.GetActiveIndustrialPropertyByProvider(provider));
+            return Ok (await _manager.GetActiveIndustrialPropertyByProvider(providerId));
         }
 
          [HttpGet("industrial/{id}")]
@@ -135,9 +135,9 @@ namespace tinder4apartment.Controllers
 
 
         [HttpPost("active/industrial/rent/match/{providerName}")]
-        public async Task<IActionResult> MatchIndustrialRentalPropertyByProvider([FromRoute]string providerName, [FromBody]IndustrialQuery query)
+        public async Task<IActionResult> MatchIndustrialRentalPropertyByProvider([FromRoute]int providerId, [FromBody]IndustrialQuery query)
         {
-            var propertyList = await _manager.GetActiveIndustrialPropertyByProvider(providerName);
+            var propertyList = await _manager.GetActiveIndustrialPropertyByProvider(providerId);
 
             var result = _match.MatchIndustrialProperty(query, Mode.Rent, propertyList);
 
@@ -145,9 +145,9 @@ namespace tinder4apartment.Controllers
         }
 
         [HttpPost("active/industrial/sale/match/{providerName}")]
-        public async Task<IActionResult> MatchIndustrialSalePropertyByProvider([FromRoute]string providerName, [FromBody]IndustrialQuery query)
+        public async Task<IActionResult> MatchIndustrialSalePropertyByProvider([FromRoute]int providerId, [FromBody]IndustrialQuery query)
         {
-            var propertyList = await _manager.GetActiveIndustrialPropertyByProvider(providerName);
+            var propertyList = await _manager.GetActiveIndustrialPropertyByProvider(providerId);
 
             var result = _match.MatchIndustrialProperty(query, Mode.Sale, propertyList);
 

@@ -7,6 +7,9 @@ namespace tinder4apartment.Models
         public bool ParkingSpace { get; set; }
 
         public Mode Mode {get; set;}
+
+        public ProviderModel ProviderModel { get; set; }
+        public int ProviderModelId { get; set; }
     }
 
     public enum Mode

@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using tinder4apartment.Data;
 using tinder4apartment.Repo;
 
+
 namespace tinder4apartment
 {
     public class Startup
@@ -39,6 +40,8 @@ namespace tinder4apartment
             services.AddScoped<IPropertyManager, PropertyManager>();
             services.AddScoped<IMatchRepo, MatchRepo>();
             services.AddScoped<IProviderRepo, ProviderRepo>();
+
+            //services.AddSwaggerDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
