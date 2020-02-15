@@ -21,13 +21,13 @@ namespace tinder4apartment.Controllers
 
 
         
-         [HttpGet("rental/{provider}/provider")]
+         [HttpGet("rental/{providerId}/provider")]
         public async Task<IActionResult> GetRentalPropertyByProvider([FromRoute]int providerId)
         {
             return Ok(await _manager.GetRentalPropertyByProvider(providerId));
         }
 
-        [HttpGet("onsale/{provider}/provider")]
+        [HttpGet("onsale/{providerId}/provider")]
         public async Task<IActionResult> GetOnSalePropertyByProvider([FromRoute]int providerId)
         {
             return Ok(await _manager.GetOnSalePropertyByProvider(providerId));
@@ -93,7 +93,7 @@ namespace tinder4apartment.Controllers
 
       
 
-        [HttpGet("industrial/{provider}/provider")]
+        [HttpGet("industrial/{providerId}/provider")]
         public async Task<IActionResult> GetIndustrialPropertyByProvider([FromRoute]int providerId)
         {
             return Ok (await _manager.GetIndustrialPropertyByProvider(providerId));
@@ -135,6 +135,17 @@ namespace tinder4apartment.Controllers
             return BadRequest("Login failed");
         }
 
+
+        [HttpGet("providerInfo/{id}")]
+        public async Task<IActionResult> GetProviderInfo(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest("Provide an id");
+            }
+
+            return Ok(await _login.GetProviderDataComplete((int)id));
+        }
 
     }
 }

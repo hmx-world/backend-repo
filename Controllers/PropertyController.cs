@@ -50,7 +50,7 @@ namespace tinder4apartment.Controllers
             return Ok(await _manager.GetOneOnSaleProperty((int)id));
         }
 
-        [HttpGet("active/rental/{provider}/provider")]
+        [HttpGet("active/rental/{providerId}/provider")]
         public async Task<IActionResult> GetActiveRentalPropertyByProvider([FromRoute]int? providerId)
         {
              if (providerId == null)
@@ -60,7 +60,7 @@ namespace tinder4apartment.Controllers
             return Ok(await _manager.GetActiveRentalPropertyByProvider((int)providerId));
         }
 
-        [HttpGet("active/onsale/{provider}/provider")]
+        [HttpGet("active/onsale/{providerId}/provider")]
         public async Task<IActionResult> GetActiveOnSalePropertyByProvider([FromRoute]int? providerId)
         {
               if (providerId == null)
@@ -121,7 +121,7 @@ namespace tinder4apartment.Controllers
             return Ok (await _manager.GetActiveIndustrialProperty());
         }
 
-        [HttpGet("active/industrial/{provider}/provider")]
+        [HttpGet("active/industrial/{providerId}/provider")]
         public async Task<IActionResult> GetIndustrialPropertyByProvider([FromRoute]int providerId)
         {
             return Ok (await _manager.GetActiveIndustrialPropertyByProvider(providerId));

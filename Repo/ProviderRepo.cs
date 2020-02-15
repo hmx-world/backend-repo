@@ -104,8 +104,12 @@ namespace tinder4apartment.Repo
             return true;
         }
 
-       
-
-
+        public async Task<ProviderModel> GetProviderDataComplete(int id)
+        {
+            return await _db.ProviderModels.Include(m => m.OnSaleProperties)
+                        .Include(m=> m.RentalProperties)
+                        .Include(m => m.IndustrialProperty)
+                        .FirstOrDefaultAsync(m => m.Id == id);
+        }
     }
 }

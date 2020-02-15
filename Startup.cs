@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using tinder4apartment.Data;
 using tinder4apartment.Repo;
+using Swashbuckle.AspNetCore.Swagger;
+using Newtonsoft.Json;
 
 
 namespace tinder4apartment
@@ -34,8 +36,14 @@ namespace tinder4apartment
                  options.UseSqlServer(
                      Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddControllers();
+             services.AddControllers().AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
+            //swagger 
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo{
+                    Title ="tinder4apartment API", Version ="v1"
+                });
+            });
 
             services.AddScoped<IPropertyManager, PropertyManager>();
             services.AddScoped<IMatchRepo, MatchRepo>();
@@ -51,6 +59,11 @@ namespace tinder4apartment
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI( c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "tinder4apartment API");
+            });
 
             app.UseHttpsRedirection();
 
