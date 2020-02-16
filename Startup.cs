@@ -41,7 +41,7 @@ namespace tinder4apartment
             //swagger 
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo{
-                    Title ="tinder4apartment API", Version ="v1"
+                    Title ="property-b2b-backend", Version ="v1"
                 });
             });
 
