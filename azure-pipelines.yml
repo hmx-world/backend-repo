@@ -15,3 +15,12 @@ variables:
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Pay-As-You-Go(6f659c5c-3967-42f1-8c0b-5892a7e9c8f5)'
+    appType: 'webAppLinux'
+    WebAppName: 'propertyb2bbackend'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    RuntimeStack: 'DOTNETCORE|Latest'
+    StartupCommand: 'dotnet run'
