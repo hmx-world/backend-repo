@@ -22,5 +22,6 @@ steps:
     appType: 'webAppLinux'
     WebAppName: 'propertyb2bbackend'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    RuntimeStack: 'DOTNETCORE|Latest'
+    RuntimeStack: 'DOTNETCORE|LTS'
     StartupCommand: 'dotnet run'
+
