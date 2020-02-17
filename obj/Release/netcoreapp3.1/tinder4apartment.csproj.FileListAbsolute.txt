@@ -54,3 +54,8 @@ c:\Users\hp\dotnet repos\tinderproperty\tinder4apartment\obj\Release\netcoreapp3
 C:\Users\hp\dotnet repos\tinderproperty\tinder4apartment\obj\Release\netcoreapp3.1\tinder4apartment.csproj.CopyComplete
 c:\Users\hp\dotnet repos\tinderproperty\tinder4apartment\obj\Release\netcoreapp3.1\tinder4apartment.dll
 c:\Users\hp\dotnet repos\tinderproperty\tinder4apartment\obj\Release\netcoreapp3.1\tinder4apartment.pdb
+c:\Users\hp\dotnet repos\tinderproperty\tinder4apartment\bin\Release\netcoreapp3.1\publish\appsettings.Development.json
+c:\Users\hp\dotnet repos\tinderproperty\tinder4apartment\bin\Release\netcoreapp3.1\publish\appsettings.json
+c:\Users\hp\dotnet repos\tinderproperty\tinder4apartment\bin\Release\netcoreapp3.1\publish\tinder4apartment.deps.json
+c:\Users\hp\dotnet repos\tinderproperty\tinder4apartment\bin\Release\netcoreapp3.1\publish\tinder4apartment.runtimeconfig.json
+c:\Users\hp\dotnet repos\tinderproperty\tinder4apartment\bin\Release\netcoreapp3.1\publish\web.config
