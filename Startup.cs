@@ -30,25 +30,16 @@ namespace tinder4apartment
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+      
         public void ConfigureServices(IServiceCollection services)
         {
-             services.AddCors(options =>
-                {
-                    options.AddPolicy("AllowAll",
-                        builder =>
-                        {
-                            builder
-                            .AllowAnyOrigin() 
-                            .AllowAnyMethod()
-                            .AllowAnyHeader()
-                            .AllowCredentials();
-                        });
-                });
+         
            services.AddDbContext<PropertyDbContext>(options =>
                  options.UseSqlServer(
                      Configuration.GetConnectionString("DefaultConnection")));
 
              services.AddControllers().AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+          
 
             //swagger 
             services.AddSwaggerGen(c => {
@@ -61,7 +52,7 @@ namespace tinder4apartment
             services.AddScoped<IMatchRepo, MatchRepo>();
             services.AddScoped<IProviderRepo, ProviderRepo>();
 
-            //services.AddSwaggerDocument();
+            //services.AddSwaggerDocument(); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,6 +63,7 @@ namespace tinder4apartment
                 app.UseDeveloperExceptionPage();
             }
 
+
             app.UseSwagger();
             app.UseSwaggerUI( c => {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "tinder4apartment API");
@@ -80,10 +72,9 @@ namespace tinder4apartment
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+           // app.UseCorsMiddleware();
+   
             app.UseAuthorization();
-
-            app.UseCors("AllowAll");
 
             app.UseEndpoints(endpoints =>
             {
