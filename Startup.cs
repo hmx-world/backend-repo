@@ -74,12 +74,14 @@ namespace tinder4apartment
 
             app.UseAuthorization();
 
+            app.UseCors("AllowLocalhost");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
 
-            app.UseCors("AllowLocalhost");
+           
         }
     }
 }
