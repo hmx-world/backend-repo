@@ -1,11 +1,13 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using tinder4apartment.Models;
 using tinder4apartment.Repo;
 
 namespace tinder4apartment.Controllers
 {
+    [EnableCors("AllowLocalhost")]
     [ApiController]
     [Route("api/[controller]")]
     public class PropertyController : ControllerBase
