@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -110,6 +111,11 @@ namespace tinder4apartment.Repo
                         .Include(m=> m.RentalProperties)
                         .Include(m => m.IndustrialProperty)
                         .FirstOrDefaultAsync(m => m.Id == id);
+        }
+
+        public async Task<List<ProviderModel>> GetProviders()
+        {
+            return await _db.ProviderModels.ToListAsync();
         }
     }
 }

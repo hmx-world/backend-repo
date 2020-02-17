@@ -47,6 +47,12 @@ namespace tinder4apartment.Controllers
             return Ok (await _manager.GetIndustrialProperty());
         }
 
+        [HttpGet("providers/all")]
+        public async Task<IActionResult> GetAllProviders()
+        {
+            return Ok (await _providerRepo.GetProviders());
+        }
+
 
         
     }
