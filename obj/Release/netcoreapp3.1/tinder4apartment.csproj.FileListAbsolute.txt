@@ -120,3 +120,8 @@ C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Release\netcoreapp3.1\
 C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Release\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\obj\Release\netcoreapp3.1\tinder4apartment.csproj.CopyComplete
+c:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Release\netcoreapp3.1\publish\publish\web.config
+c:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Release\netcoreapp3.1\publish\publish\appsettings.Development.json
+c:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Release\netcoreapp3.1\publish\publish\appsettings.json
+c:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Release\netcoreapp3.1\publish\publish\tinder4apartment.deps.json
+c:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Release\netcoreapp3.1\publish\publish\tinder4apartment.runtimeconfig.json

@@ -158,6 +158,9 @@ namespace tinder4apartment.Repo
             return await _db.IndustrialProperties.Where(m => m.ProviderModelId == providerId && m.IsActive == true).ToListAsync();
         }
 
-      
+        public async Task<List<string>> GetProviders()
+        {
+            return await _db.ProviderModels.Select(m => m.Name).ToListAsync();
+        }
     }
 }

@@ -175,5 +175,11 @@ namespace tinder4apartment.Controllers
             return Ok(result.OrderByDescending(m => m.Rank));
         }
 
+        [HttpGet("providers")]
+        public async Task<IActionResult> GetProvidersName()
+        {
+            return Ok(await _manager.GetProviders());
+        }
+
     }
 }

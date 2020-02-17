@@ -1,4 +1,5 @@
 {
     "appService.preDeployTask": "publish-release",
-    "appService.deploySubpath": "publish"
+    "appService.deploySubpath": "publish",
+    "appService.defaultWebAppToDeploy": "/subscriptions/6f659c5c-3967-42f1-8c0b-5892a7e9c8f5/resourceGroups/tinder4apartment/providers/Microsoft.Web/sites/property-b2b-v2"
 }

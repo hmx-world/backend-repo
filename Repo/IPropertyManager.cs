@@ -41,7 +41,7 @@ namespace tinder4apartment.Repo {
 
        
     
-        
+        Task<List<string>> GetProviders();
    
     }
 }
