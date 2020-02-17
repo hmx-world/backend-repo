@@ -8,7 +8,7 @@ using tinder4apartment.Repo;
 
 namespace tinder4apartment.Controllers
 {
-       [EnableCors("AllowLocalhost")]
+       [EnableCors("AllowAll")]
     [ApiController]
     [Route("api/[controller]")]
     public class ProviderController : ControllerBase
