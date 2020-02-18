@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using tinder4apartment.Data;
 
 namespace tinder4apartment.Migrations
 {
     [DbContext(typeof(PropertyDbContext))]
-    partial class PropertyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200218135807_addedvideolinktodb")]
+    partial class addedvideolinktodb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,6 +42,7 @@ namespace tinder4apartment.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageLink1")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageLink2")
@@ -81,9 +84,6 @@ namespace tinder4apartment.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("VideoLink")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ProviderModelId");
@@ -110,6 +110,7 @@ namespace tinder4apartment.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageLink1")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageLink2")
@@ -152,9 +153,6 @@ namespace tinder4apartment.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VideoLink")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -222,6 +220,7 @@ namespace tinder4apartment.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageLink1")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageLink2")
@@ -258,9 +257,6 @@ namespace tinder4apartment.Migrations
 
                     b.Property<string>("State")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VideoLink")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("WaterSupply")

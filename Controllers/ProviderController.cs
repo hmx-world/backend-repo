@@ -37,7 +37,7 @@ namespace tinder4apartment.Controllers
 
         
         [HttpPost("rental")]
-        public async Task<IActionResult> AddRentalProperty([FromBody]RentalProperty property)
+        public async Task<IActionResult> AddRentalProperty([FromForm]RentalProperty property)
         {
             if (!ModelState.IsValid)
             {
@@ -54,7 +54,8 @@ namespace tinder4apartment.Controllers
         }
 
          [HttpPost("onsale")]
-        public async Task<IActionResult> AddOnSaleProperty([FromBody]OnSaleProperty property)
+         [DisableRequestSizeLimit]
+        public async Task<IActionResult> AddOnSaleProperty([FromForm]OnSaleProperty property)
         {
             if (!ModelState.IsValid)
             {
@@ -104,7 +105,7 @@ namespace tinder4apartment.Controllers
         
 
         [HttpPost("industrial")]
-        public async Task<IActionResult> AddIndustrialProperty([FromBody]IndustrialProperty property)
+        public async Task<IActionResult> AddIndustrialProperty([FromForm]IndustrialProperty property)
         {
             if (!ModelState.IsValid)
             {

@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
 
 namespace tinder4apartment.Models
 {
@@ -19,8 +21,9 @@ namespace tinder4apartment.Models
         public IList<OnSaleProperty> OnSaleProperties {get; set;} 
         public IList<RentalProperty> RentalProperties {get; set;}
         public IList<IndustrialProperty> IndustrialProperty { get; set; }
-        
 
+         [NotMapped]
+        public IFormFile imageFile1 {get; set;}
         public string LoginId {get; set;}
     }
 }

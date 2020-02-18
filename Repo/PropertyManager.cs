@@ -10,9 +10,11 @@ namespace tinder4apartment.Repo
     public class PropertyManager : IPropertyManager
     {
         private readonly PropertyDbContext _db;
-        public PropertyManager(PropertyDbContext db)
+        private IBlobRepo _blob;
+        public PropertyManager(PropertyDbContext db, IBlobRepo blob)
         {
             _db = db;
+            _blob = blob;
         }
 
         public async Task<OnSaleProperty> AddOnSaleProperty(OnSaleProperty property)
@@ -20,6 +22,33 @@ namespace tinder4apartment.Repo
             if (property != null)
             {
                 property.IsActive = true;
+                
+                var image = property.imageFile1;
+
+                var imageFileName = image.FileName;
+                string imageMimeType = image.ContentType;
+                byte[] imageData = new byte[image.Length];
+
+                property.ImageLink1 = _blob.UploadFileToBlob(imageFileName, imageData, imageMimeType);
+
+                // var image1 = property.imageFile2;
+
+                // var imageFileName2 = image1.FileName;
+                // string imageMimeType2 = image1.ContentType;
+                // byte[] imageData2 = new byte[image1.Length];
+
+                // property.ImageLink2 = _blob.UploadFileToBlob(imageFileName2, imageData2, imageMimeType2);
+
+                // var image2 = property.imageFile3;
+
+                // var imageFileName3 = image2.FileName;
+                // string imageMimeType3 = image2.ContentType;
+                // byte[] imageData3 = new byte[image2.Length];
+
+                // property.ImageLink3 = _blob.UploadFileToBlob(imageFileName3, imageData3, imageMimeType3);
+
+
+
                 _db.OnSaleProperties.Add(property);
                 await _db.SaveChangesAsync();
 
