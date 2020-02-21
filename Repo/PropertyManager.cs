@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using tinder4apartment.Data;
 using tinder4apartment.Models;
@@ -27,25 +29,33 @@ namespace tinder4apartment.Repo
 
                 var imageFileName = image.FileName;
                 string imageMimeType = image.ContentType;
-                byte[] imageData = new byte[image.Length];
+                byte[] imageData = GetBytes(property.imageFile1);
 
                 property.ImageLink1 = _blob.UploadFileToBlob(imageFileName, imageData, imageMimeType);
 
-                // var image1 = property.imageFile2;
+                var image1 = property.imageFile2;
 
-                // var imageFileName2 = image1.FileName;
-                // string imageMimeType2 = image1.ContentType;
-                // byte[] imageData2 = new byte[image1.Length];
+                var imageFileName2 = image1.FileName;
+                string imageMimeType2 = image1.ContentType;
+                byte[] imageData2 = GetBytes(image1);
 
-                // property.ImageLink2 = _blob.UploadFileToBlob(imageFileName2, imageData2, imageMimeType2);
+                property.ImageLink2 = _blob.UploadFileToBlob(imageFileName2, imageData2, imageMimeType2);
 
-                // var image2 = property.imageFile3;
+                var image2 = property.imageFile3;
 
-                // var imageFileName3 = image2.FileName;
-                // string imageMimeType3 = image2.ContentType;
-                // byte[] imageData3 = new byte[image2.Length];
+                var imageFileName3 = image2.FileName;
+                string imageMimeType3 = image2.ContentType;
+                byte[] imageData3 = GetBytes(image2);
 
-                // property.ImageLink3 = _blob.UploadFileToBlob(imageFileName3, imageData3, imageMimeType3);
+                property.ImageLink3 = _blob.UploadFileToBlob(imageFileName3, imageData3, imageMimeType3);
+
+                 var videoFile = property.VideoFIle;
+
+                var videoFileName = videoFile.FileName;
+                string videoFileMimeType = videoFile.ContentType;
+                byte[] videoFileData = GetBytes(videoFile);
+
+                property.ImageLink3 = _blob.UploadFileToBlob(videoFileName, videoFileData, videoFileMimeType);
 
 
 
@@ -62,7 +72,39 @@ namespace tinder4apartment.Repo
         {
              if (property != null)
             {
-                property.IsActive = true;
+                 property.IsActive = true;
+                
+                var image = property.imageFile1;
+
+                var imageFileName = image.FileName;
+                string imageMimeType = image.ContentType;
+                byte[] imageData = GetBytes(property.imageFile1);
+
+                property.ImageLink1 = _blob.UploadFileToBlob(imageFileName, imageData, imageMimeType);
+
+                var image1 = property.imageFile2;
+
+                var imageFileName2 = image1.FileName;
+                string imageMimeType2 = image1.ContentType;
+                byte[] imageData2 = GetBytes(image1);
+
+                property.ImageLink2 = _blob.UploadFileToBlob(imageFileName2, imageData2, imageMimeType2);
+
+                var image2 = property.imageFile3;
+
+                var imageFileName3 = image2.FileName;
+                string imageMimeType3 = image2.ContentType;
+                byte[] imageData3 = GetBytes(image2);
+
+                property.ImageLink3 = _blob.UploadFileToBlob(imageFileName3, imageData3, imageMimeType3);
+
+                 var videoFile = property.VideoFIle;
+
+                var videoFileName = videoFile.FileName;
+                string videoFileMimeType = videoFile.ContentType;
+                byte[] videoFileData = GetBytes(videoFile);
+
+                property.ImageLink3 = _blob.UploadFileToBlob(videoFileName, videoFileData, videoFileMimeType);
                 _db.RentalProperties.Add(property);
                 await _db.SaveChangesAsync();
 
@@ -152,7 +194,39 @@ namespace tinder4apartment.Repo
         {
              if (property != null)
             {
-                property.IsActive = true;
+                 property.IsActive = true;
+                
+                var image = property.imageFile1;
+
+                var imageFileName = image.FileName;
+                string imageMimeType = image.ContentType;
+                byte[] imageData = GetBytes(property.imageFile1);
+
+                property.ImageLink1 = _blob.UploadFileToBlob(imageFileName, imageData, imageMimeType);
+
+                var image1 = property.imageFile2;
+
+                var imageFileName2 = image1.FileName;
+                string imageMimeType2 = image1.ContentType;
+                byte[] imageData2 = GetBytes(image1);
+
+                property.ImageLink2 = _blob.UploadFileToBlob(imageFileName2, imageData2, imageMimeType2);
+
+                var image2 = property.imageFile3;
+
+                var imageFileName3 = image2.FileName;
+                string imageMimeType3 = image2.ContentType;
+                byte[] imageData3 = GetBytes(image2);
+
+                property.ImageLink3 = _blob.UploadFileToBlob(imageFileName3, imageData3, imageMimeType3);
+
+                 var videoFile = property.VideoFIle;
+
+                var videoFileName = videoFile.FileName;
+                string videoFileMimeType = videoFile.ContentType;
+                byte[] videoFileData = GetBytes(videoFile);
+
+                property.ImageLink3 = _blob.UploadFileToBlob(videoFileName, videoFileData, videoFileMimeType);
                 _db.IndustrialProperties.Add(property);
                 await _db.SaveChangesAsync();
 
@@ -191,5 +265,15 @@ namespace tinder4apartment.Repo
         {
             return await _db.ProviderModels.Select(m => m.Name).ToListAsync();
         }
+
+        public static byte[] GetBytes(IFormFile file)
+        {
+            using (var ms = new MemoryStream())
+            {
+                file.CopyTo(ms);
+                return ms.ToArray();
+            }
+        }
+
     }
 }

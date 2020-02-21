@@ -54,7 +54,7 @@ namespace tinder4apartment.Controllers
         }
 
          [HttpPost("onsale")]
-         [DisableRequestSizeLimit]
+         [RequestFormLimits(MultipartBodyLengthLimit = long.MaxValue)]
         public async Task<IActionResult> AddOnSaleProperty([FromForm]OnSaleProperty property)
         {
             if (!ModelState.IsValid)
@@ -65,6 +65,11 @@ namespace tinder4apartment.Controllers
             var result = await _manager.AddOnSaleProperty(property);
             if (result != null)
             {
+                result.imageFile1 = null;
+                result.imageFile2 = null;
+                result.imageFile3 = null;
+                result.VideoFIle = null;
+                
                 return Ok(result);
             }
 

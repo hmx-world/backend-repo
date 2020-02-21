@@ -57,7 +57,7 @@ namespace tinder4apartment.Repo
                     cloudBlockBlob.Properties.ContentType = fileMimeType;
                     await cloudBlockBlob.UploadFromByteArrayAsync(fileData, 0, fileData.Length);
 
-                    return cloudBlockBlob.Uri.AbsoluteUri;
+                    return cloudBlockBlob.Uri.ToString();
                 }
 
                 return "";
