@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using tinder4apartment.Data;
 using tinder4apartment.Models;
 
@@ -13,9 +17,13 @@ namespace tinder4apartment.Repo
     public class ProviderRepo : IProviderRepo
     {
         private readonly PropertyDbContext _db;
-        public ProviderRepo(PropertyDbContext db)
+        private readonly IBlobRepo _blob;
+        private readonly IConfiguration _config;
+        public ProviderRepo(PropertyDbContext db, IBlobRepo blob, IConfiguration config)
         {
             _db = db;
+            _blob = blob;
+            _config = config;
         }
         public async Task<ProviderLoginDto> CreateProvider(ProviderModel providerDetails)
         {
@@ -27,9 +35,15 @@ namespace tinder4apartment.Repo
             providerDetails.PasswordHash = passwordHash;
             providerDetails.PasswordSalt = passwordSalt;
             providerDetails.LoginId = providerDetails.Name+ (rn.Next() * 1987).ToString();
+  
             
+            var imageFileName = providerDetails.imageFile1.FileName;
+            string imageMimeType =providerDetails.imageFile1.ContentType;
+            byte[] imageData = PropertyManager.GetBytes(providerDetails.imageFile1);
 
-            _db.Add(providerDetails);
+            providerDetails.ImageUri = _blob.UploadFileToBlob(imageFileName, imageData, imageMimeType);
+
+            _db.ProviderModels.Add(providerDetails);
             await _db.SaveChangesAsync();
 
 
@@ -44,7 +58,7 @@ namespace tinder4apartment.Repo
             throw new System.NotImplementedException();
         }
 
-        public async Task<string> ProviderLogin(ProviderLoginDto provider)
+        public async Task<ProviderVitalInfo> ProviderLogin(ProviderLoginDto provider)
         {
             var details = await _db.ProviderModels.FirstOrDefaultAsync(m=> m.LoginId == provider.LoginId);
 
@@ -54,10 +68,16 @@ namespace tinder4apartment.Repo
                 {
                     return null;
                 }
-                
-                string result = "login successful";
+                string tokenGen = GenerateToken(details);
 
-                return result;
+                var providerInfo = new ProviderVitalInfo{
+                    Name = details.Name,
+                    Id = details.Id,
+                    Token = tokenGen,
+                    Email = details.Email
+                };
+
+                return providerInfo;
             }
 
             return null;
@@ -117,5 +137,35 @@ namespace tinder4apartment.Repo
         {
             return await _db.ProviderModels.ToListAsync();
         }
+
+         public string GenerateToken(ProviderModel userData)
+        {
+            //generate token
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_config.GetSection("AppSettings:Token").Value);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[] { 
+                    new Claim(ClaimTypes.NameIdentifier,userData.Email)
+                }),
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+
+            return tokenString;
+        }
+        
+
+    }
+
+
+    public class ProviderVitalInfo{
+        public string Name;
+        public string Email;
+        public int Id;
+        public string Token;
     }
 }

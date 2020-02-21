@@ -10,7 +10,7 @@ namespace tinder4apartment.Repo
         Task<ProviderLoginDto> CreateProvider (ProviderModel providerDetails);
         Task<ProviderModel> EditProviderInfo(ProviderModel providerDetails, int id);
 
-        Task<string> ProviderLogin(ProviderLoginDto provider);
+        Task<ProviderVitalInfo> ProviderLogin(ProviderLoginDto provider);
 
         Task<ProviderModel> GetProviderDataComplete(int id);
 

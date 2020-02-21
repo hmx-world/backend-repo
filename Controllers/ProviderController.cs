@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using tinder4apartment.Models;
@@ -37,6 +38,7 @@ namespace tinder4apartment.Controllers
 
         
         [HttpPost("rental")]
+       // [RequestFormLimits(MultipartBodyLengthLimit = long.MaxValue)]
         public async Task<IActionResult> AddRentalProperty([FromForm]RentalProperty property)
         {
             if (!ModelState.IsValid)
@@ -54,7 +56,7 @@ namespace tinder4apartment.Controllers
         }
 
          [HttpPost("onsale")]
-         [RequestFormLimits(MultipartBodyLengthLimit = long.MaxValue)]
+       //  [RequestFormLimits(MultipartBodyLengthLimit = long.MaxValue)]
         public async Task<IActionResult> AddOnSaleProperty([FromForm]OnSaleProperty property)
         {
             if (!ModelState.IsValid)
@@ -108,8 +110,9 @@ namespace tinder4apartment.Controllers
         }
 
         
-
+        [Authorize]
         [HttpPost("industrial")]
+       // [RequestFormLimits(MultipartBodyLengthLimit = long.MaxValue)]
         public async Task<IActionResult> AddIndustrialProperty([FromForm]IndustrialProperty property)
         {
             if (!ModelState.IsValid)
@@ -120,12 +123,18 @@ namespace tinder4apartment.Controllers
             var result = await _manager.AddIndustrialProperty(property);
             if (result != null)
             {
+                  result.imageFile1 = null;
+                result.imageFile2 = null;
+                result.imageFile3 = null;
+                result.VideoFIle = null;
+                
                 return Ok(result);
             }
 
             return BadRequest("Request is null");
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]ProviderLoginDto loginDto)
         {
@@ -153,6 +162,21 @@ namespace tinder4apartment.Controllers
             }
 
             return Ok(await _login.GetProviderDataComplete((int)id));
+        }
+
+
+
+        
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public async Task<IActionResult> RegisterProvider([FromForm] ProviderModel provider)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(await _login.CreateProvider(provider));
         }
 
     }

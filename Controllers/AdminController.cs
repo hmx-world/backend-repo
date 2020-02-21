@@ -31,16 +31,6 @@ namespace tinder4apartment.Controllers
             return Ok(await _manager.GetAllOnSaleProperty());
         }
 
-        [HttpPost("create-provider")]
-        public async Task<IActionResult> CreateProvider([FromBody] ProviderModel provider)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            return Ok(await _providerRepo.CreateProvider(provider));
-        }
 
           [HttpGet("industrial/all")]
         public async Task<IActionResult> GetIndustrialProperty()

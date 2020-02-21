@@ -15,7 +15,10 @@ using tinder4apartment.Data;
 using tinder4apartment.Repo;
 using Swashbuckle.AspNetCore.Swagger;
 using Newtonsoft.Json;
-
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
 
 namespace tinder4apartment
 {
@@ -38,6 +41,16 @@ namespace tinder4apartment
                  options.UseSqlServer(
                      Configuration.GetConnectionString("DefaultConnection")));
 
+            // services.AddAuthentication(options => {
+            //     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            // }).AddJwtBearer(options => {
+            //     options.Authority = Configuration["Auth0:Domain"];
+            //     options.Audience= Configuration["Auth0:Audience"];
+            // });
+
+
+
              services.AddControllers().AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
           
 
@@ -54,6 +67,22 @@ namespace tinder4apartment
             services.AddScoped<IBlobRepo, BlobRepo>();
 
             //services.AddSwaggerDocument(); 
+
+            services.Configure<FormOptions>(options => {
+                options.ValueLengthLimit = int.MaxValue;
+                options.MultipartBodyLengthLimit = int.MaxValue;
+                options.MultipartHeadersLengthLimit = int.MaxValue;
+            });
+
+             var key = Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value);
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
+                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +103,8 @@ namespace tinder4apartment
 
             app.UseRouting();
            // app.UseCorsMiddleware();
+
+           app.UseAuthentication();
    
             app.UseAuthorization();
 
