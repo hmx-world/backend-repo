@@ -182,5 +182,11 @@ namespace tinder4apartment.Controllers
             return Ok(await _manager.GetProviders());
         }
 
+        [HttpGet("provider/{id}")]
+        public async Task<IActionResult> GetOneProvider([FromRoute]int id)
+        {
+            return Ok( await _manager.GetOneProvider(id));
+        }
+
     }
 }

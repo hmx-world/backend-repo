@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace tinder4apartment.Models
 {
-    public class ProviderModel
+    public class ProviderData
     {
         public int Id { get; set; }
         public string Name { get; set; }

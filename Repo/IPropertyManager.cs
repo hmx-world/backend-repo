@@ -42,6 +42,8 @@ namespace tinder4apartment.Repo {
        
     
         Task<List<string>> GetProviders();
+
+        Task<ProviderModel> GetOneProvider(int id);
    
     }
 }

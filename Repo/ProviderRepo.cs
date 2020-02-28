@@ -34,7 +34,7 @@ namespace tinder4apartment.Repo
 
             providerDetails.PasswordHash = passwordHash;
             providerDetails.PasswordSalt = passwordSalt;
-            providerDetails.LoginId = providerDetails.Name+ (rn.Next() * 1987).ToString();
+            providerDetails.LoginId = providerDetails.Name+ (rn.Next() * 789).ToString();
   
             
             var imageFileName = providerDetails.imageFile1.FileName;
@@ -127,10 +127,17 @@ namespace tinder4apartment.Repo
 
         public async Task<ProviderModel> GetProviderDataComplete(int id)
         {
-            return await _db.ProviderModels.Include(m => m.OnSaleProperties)
+            var provider =  await _db.ProviderModels.Include(m => m.OnSaleProperties)
                         .Include(m=> m.RentalProperties)
                         .Include(m => m.IndustrialProperty)
                         .FirstOrDefaultAsync(m => m.Id == id);
+
+
+            provider.Password = null;
+            provider.PasswordSalt = null;
+            provider.PasswordHash = null;
+
+            return provider;
         }
 
         public async Task<List<ProviderModel>> GetProviders()

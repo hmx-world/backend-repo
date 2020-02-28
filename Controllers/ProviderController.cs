@@ -9,7 +9,7 @@ using tinder4apartment.Repo;
 
 namespace tinder4apartment.Controllers
 {
-  
+    [Produces("application/json")]  
     [ApiController]
     [Route("api/[controller]")]
     public class ProviderController : ControllerBase
@@ -23,7 +23,7 @@ namespace tinder4apartment.Controllers
         }
 
 
-        
+               [Authorize]
          [HttpGet("rental/{providerId}/provider")]
         public async Task<IActionResult> GetRentalPropertyByProvider([FromRoute]int providerId)
         {
@@ -36,7 +36,7 @@ namespace tinder4apartment.Controllers
             return Ok(await _manager.GetOnSalePropertyByProvider(providerId));
         }
 
-        
+               [Authorize]
         [HttpPost("rental")]
        // [RequestFormLimits(MultipartBodyLengthLimit = long.MaxValue)]
         public async Task<IActionResult> AddRentalProperty([FromForm]RentalProperty property)
@@ -55,6 +55,7 @@ namespace tinder4apartment.Controllers
             return BadRequest("property is null");
         }
 
+         [Authorize]
          [HttpPost("onsale")]
        //  [RequestFormLimits(MultipartBodyLengthLimit = long.MaxValue)]
         public async Task<IActionResult> AddOnSaleProperty([FromForm]OnSaleProperty property)
@@ -78,7 +79,7 @@ namespace tinder4apartment.Controllers
             return BadRequest("property is null");
         }
 
-
+       [Authorize]
         [HttpGet("onsale/{id}/deactivate")]
         public IActionResult DeactivateOnSaleProperty([FromRoute]int id)
         {
@@ -102,7 +103,7 @@ namespace tinder4apartment.Controllers
 
 
       
-
+       [Authorize]
         [HttpGet("industrial/{providerId}/provider")]
         public async Task<IActionResult> GetIndustrialPropertyByProvider([FromRoute]int providerId)
         {
@@ -152,7 +153,7 @@ namespace tinder4apartment.Controllers
             return BadRequest("Login failed");
         }
 
-
+       [Authorize]
         [HttpGet("providerInfo/{id}")]
         public async Task<IActionResult> GetProviderInfo(int? id)
         {
@@ -167,16 +168,18 @@ namespace tinder4apartment.Controllers
 
 
         
-        [AllowAnonymous]
+
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterProvider([FromForm] ProviderModel provider)
+        public async Task<IActionResult> Register([FromForm]ProviderModel provider)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            return Ok(await _login.CreateProvider(provider));
+            var result = await _login.CreateProvider(provider);
+
+            return Ok(result);
         }
 
     }

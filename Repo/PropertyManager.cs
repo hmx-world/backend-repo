@@ -275,5 +275,15 @@ namespace tinder4apartment.Repo
             }
         }
 
+        public async Task<ProviderModel> GetOneProvider(int id)
+        {
+            var provider =  await _db.ProviderModels.FirstOrDefaultAsync(m=> m.Id == id);
+
+            provider.Password = null;
+            provider.PasswordHash = null;
+            provider.PasswordSalt = null;
+
+            return provider;
+        }
     }
 }
