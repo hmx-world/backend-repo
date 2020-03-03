@@ -81,6 +81,10 @@ namespace tinder4apartment.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Town")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("VideoLink")
                         .HasColumnType("nvarchar(max)");
 
@@ -154,6 +158,10 @@ namespace tinder4apartment.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Town")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("VideoLink")
                         .HasColumnType("nvarchar(max)");
 
@@ -187,6 +195,9 @@ namespace tinder4apartment.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Number")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
@@ -256,7 +267,17 @@ namespace tinder4apartment.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("RefundableCautionDeposit")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("RefundableCautionDepositPrice")
+                        .HasColumnType("float");
+
                     b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Town")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

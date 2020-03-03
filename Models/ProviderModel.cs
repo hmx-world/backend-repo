@@ -24,5 +24,7 @@ namespace tinder4apartment.Models
         public IFormFile imageFile1 { get; set; }
 
         public string LoginId { get; set; }
+
+        public string Number {get; set;}
     }
 }

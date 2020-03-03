@@ -153,7 +153,7 @@ namespace tinder4apartment.Controllers
             return BadRequest("Login failed");
         }
 
-       [Authorize]
+   
         [HttpGet("providerInfo/{id}")]
         public async Task<IActionResult> GetProviderInfo(int? id)
         {

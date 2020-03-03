@@ -13,5 +13,9 @@ namespace tinder4apartment.Models
 
         public virtual ProviderModel ProviderModel { get; set; }
         public int ProviderModelId { get; set; }
+
+        public bool RefundableCautionDeposit {get; set; }
+
+        public double RefundableCautionDepositPrice {get; set;}
     }
 }

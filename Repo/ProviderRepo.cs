@@ -74,7 +74,8 @@ namespace tinder4apartment.Repo
                     Name = details.Name,
                     Id = details.Id,
                     Token = tokenGen,
-                    Email = details.Email
+                    Email = details.Email,
+                    LoginId = details.LoginId
                 };
 
                 return providerInfo;
@@ -174,5 +175,7 @@ namespace tinder4apartment.Repo
         public string Email;
         public int Id;
         public string Token;
+
+        public string LoginId;
     }
 }

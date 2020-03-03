@@ -43,6 +43,7 @@ namespace tinder4apartment.Models
 
         public bool IsActive { get; set; }
 
-        
+        [Required]
+        public string Town {get; set;}   
     }
 }
