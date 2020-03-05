@@ -34,7 +34,7 @@ namespace tinder4apartment.Repo
 
             providerDetails.PasswordHash = passwordHash;
             providerDetails.PasswordSalt = passwordSalt;
-            providerDetails.LoginId = providerDetails.Name+ (rn.Next() * 789).ToString();
+            providerDetails.LoginId = (rn.Next() * 789).ToString();
   
             
             var imageFileName = providerDetails.imageFile1.FileName;

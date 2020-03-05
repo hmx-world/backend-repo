@@ -55,7 +55,7 @@ namespace tinder4apartment.Repo
                 string videoFileMimeType = videoFile.ContentType;
                 byte[] videoFileData = GetBytes(videoFile);
 
-                property.ImageLink3 = _blob.UploadFileToBlob(videoFileName, videoFileData, videoFileMimeType);
+                property.VideoLink = _blob.UploadFileToBlob(videoFileName, videoFileData, videoFileMimeType);
 
 
 
@@ -104,7 +104,7 @@ namespace tinder4apartment.Repo
                 string videoFileMimeType = videoFile.ContentType;
                 byte[] videoFileData = GetBytes(videoFile);
 
-                property.ImageLink3 = _blob.UploadFileToBlob(videoFileName, videoFileData, videoFileMimeType);
+                property.VideoLink = _blob.UploadFileToBlob(videoFileName, videoFileData, videoFileMimeType);
                 _db.RentalProperties.Add(property);
                 await _db.SaveChangesAsync();
 
@@ -226,7 +226,7 @@ namespace tinder4apartment.Repo
                 string videoFileMimeType = videoFile.ContentType;
                 byte[] videoFileData = GetBytes(videoFile);
 
-                property.ImageLink3 = _blob.UploadFileToBlob(videoFileName, videoFileData, videoFileMimeType);
+                property.VideoLink = _blob.UploadFileToBlob(videoFileName, videoFileData, videoFileMimeType);
                 _db.IndustrialProperties.Add(property);
                 await _db.SaveChangesAsync();
 

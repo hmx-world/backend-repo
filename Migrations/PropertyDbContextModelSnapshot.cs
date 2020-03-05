@@ -294,6 +294,33 @@ namespace tinder4apartment.Migrations
                     b.ToTable("RentalProperties");
                 });
 
+            modelBuilder.Entity("tinder4apartment.Models.SubModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DueDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LoginId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Plan")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PropertyLimit")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SubModels");
+                });
+
             modelBuilder.Entity("tinder4apartment.Models.IndustrialProperty", b =>
                 {
                     b.HasOne("tinder4apartment.Models.ProviderModel", "ProviderModel")

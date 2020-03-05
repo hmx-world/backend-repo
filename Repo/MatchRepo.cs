@@ -15,7 +15,7 @@ namespace tinder4apartment.Repo
             {
                 case Mode.Rent:
                     industrials = industrials.Where( m => m.Mode == Mode.Rent).ToList();
-                    industrials = industrials.Where( m => m.State == query.State).ToList();
+                    industrials = industrials.Where( m => m.State.ToLower() == query.State.ToLower()).ToList();
 
                     foreach (var item in industrials)
                     {
@@ -42,7 +42,7 @@ namespace tinder4apartment.Repo
                         
                         propertyIndex.Rank = roomPoint;
 
-                        if (item.City == query.City)
+                        if (item.City.ToLower() == query.City.ToLower())
                         {
                             propertyIndex.Rank = propertyIndex.Rank +3;
                         }
@@ -54,7 +54,7 @@ namespace tinder4apartment.Repo
 
                 case Mode.Sale:
                     industrials = industrials.Where( m => m.Mode == Mode.Sale).ToList();
-                    industrials = industrials.Where( m => m.State == query.State).ToList();
+                    industrials = industrials.Where( m => m.State.ToLower() == query.State.ToLower()).ToList();
 
                     foreach (var item in industrials)
                     {
@@ -81,7 +81,7 @@ namespace tinder4apartment.Repo
                         
                         propertyIndex.Rank = roomPoint;
 
-                        if (item.City == query.City)
+                        if (item.City.ToLower() == query.City.ToLower())
                         {
                             propertyIndex.Rank = propertyIndex.Rank +3;
                         }
@@ -101,7 +101,7 @@ namespace tinder4apartment.Repo
         {
            List<OnSalePropertyIndex> indexedPropertyList = new List<OnSalePropertyIndex>();
 
-            onsale = onsale.Where(m => m.State == query.State).ToList();
+            onsale = onsale.Where(m => m.State.ToLower() == query.State.ToLower()).ToList();
 
             
             if (query.AvgChildrenAge == 0)
@@ -136,7 +136,7 @@ namespace tinder4apartment.Repo
                 
                 propertyIndex.Rank = roomPoint + securityPoint;
 
-                if (item.City == query.City)
+                if (item.City.ToLower() == query.City.ToLower())
                 {
                     propertyIndex.Rank = propertyIndex.Rank + 2;
                 }
@@ -151,7 +151,7 @@ namespace tinder4apartment.Repo
         {
             List<RentalPropertyIndex> indexedPropertyList = new List<RentalPropertyIndex>();
 
-            rentals = rentals.Where(m=> m.State == query.State).ToList();
+            rentals = rentals.Where(m=> m.State.ToLower() == query.State.ToLower()).ToList();
 
             if (query.AvgChildrenAge == 0)
             {
@@ -184,7 +184,7 @@ namespace tinder4apartment.Repo
                 
                 propertyIndex.Rank = roomPoint + securityPoint;
 
-                if (item.City == query.City)
+                if (item.City.ToLower() == query.City.ToLower())
                 {
                     propertyIndex.Rank = propertyIndex.Rank + 2;
                 }

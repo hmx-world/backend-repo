@@ -72,7 +72,7 @@ namespace tinder4apartment.Controllers
         }
 
 
-        [HttpPost("active/rental/match/{providerName}")]
+        [HttpPost("active/rental/match/{providerId}")]
         public async Task<IActionResult> MatchRentalPropertyByProvider([FromRoute]int providerId, [FromBody]UserQuery query)
         {
             var propertyList = await _manager.GetActiveRentalPropertyByProvider(providerId);
@@ -82,7 +82,7 @@ namespace tinder4apartment.Controllers
             return Ok(result.OrderByDescending(m => m.Rank));
         }
 
-        [HttpPost("active/onsale/match/{providerName}")]
+        [HttpPost("active/onsale/match/{providerId}")]
         public async Task<IActionResult> MatchOnSalePropertyByProvider([FromRoute]int providerId, [FromBody]UserQuery query)
         {
             var propertyList = await _manager.GetActiveOnSalePropertyByProvider(providerId);
@@ -135,7 +135,7 @@ namespace tinder4apartment.Controllers
         }
 
 
-        [HttpPost("active/industrial/rent/match/{providerName}")]
+        [HttpPost("active/industrial/rent/match/{providerId}")]
         public async Task<IActionResult> MatchIndustrialRentalPropertyByProvider([FromRoute]int providerId, [FromBody]IndustrialQuery query)
         {
             var propertyList = await _manager.GetActiveIndustrialPropertyByProvider(providerId);
@@ -145,7 +145,7 @@ namespace tinder4apartment.Controllers
             return Ok(result.OrderByDescending(m => m.Rank));
         }
 
-        [HttpPost("active/industrial/sale/match/{providerName}")]
+        [HttpPost("active/industrial/sale/match/{providerId}")]
         public async Task<IActionResult> MatchIndustrialSalePropertyByProvider([FromRoute]int providerId, [FromBody]IndustrialQuery query)
         {
             var propertyList = await _manager.GetActiveIndustrialPropertyByProvider(providerId);
