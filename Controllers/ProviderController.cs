@@ -233,15 +233,15 @@ namespace tinder4apartment.Controllers
             return Ok(result);
         }
 
-        [HttpPost("subscription/upgrade")]
-        public IActionResult UpgradeSubscription([FromBody]Upgrade upgrade)
+        [HttpPost("subscription/upgrade/{userSubId}/{newPlan}")]
+        public IActionResult UpgradeSubscription([FromRoute]int userSubId, [FromRoute]int newPlan)
         {
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-             _sub.UpdateUserData(upgrade.userSubId, upgrade.newPlan);
+             _sub.UpdateUserData(userSubId, newPlan);
 
              return Ok();
         }

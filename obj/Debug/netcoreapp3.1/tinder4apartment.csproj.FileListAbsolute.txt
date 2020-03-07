@@ -1,3 +1,5 @@
+C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\publish\publish\web.config
+C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\publish\web.config
 C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\web.config
 C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\web.config
 C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\publish\publish\publish\web.config
@@ -16,6 +18,14 @@ C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\pu
 C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\appsettings.json
 C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\appsettings.Development.json
 C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\appsettings.json
+C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\publish\appsettings.Development.json
+C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\publish\appsettings.json
+C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\publish\publish\appsettings.Development.json
+C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\publish\publish\appsettings.json
+C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\publish\publish\tinder4apartment.deps.json
+C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\publish\publish\tinder4apartment.runtimeconfig.json
+C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\publish\tinder4apartment.deps.json
+C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\publish\tinder4apartment.runtimeconfig.json
 C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\tinder4apartment.deps.json
 C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\tinder4apartment.runtimeconfig.json
 C:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\tinder4apartment.deps.json

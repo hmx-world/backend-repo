@@ -91,16 +91,16 @@ namespace tinder4apartment.Repo
             switch (subModel.Plan)
             {
                 case Plan.Basic:
-                    subModel.PropertyLimit = 20;
+                    subModel.PropertyLimit = 40;
                     break;
                 case Plan.Trial:
-                    subModel.PropertyLimit = 10;
+                    subModel.PropertyLimit = 20;
                     break;
                 case Plan.Premium:
-                    subModel.PropertyLimit = 30;
+                    subModel.PropertyLimit = 70;
                     break;
                 default:
-                    subModel.PropertyLimit = 10;
+                    subModel.PropertyLimit = 20;
                     break;
             }
 
@@ -125,10 +125,10 @@ namespace tinder4apartment.Repo
         private int PropertyLimitBasedOnNewPlan(int currentPropertyLimit, int newPlan)
         {
             if(newPlan == 1){
-                return currentPropertyLimit+20;
+                return currentPropertyLimit+40;
             }
             else if(newPlan == 2){
-                return currentPropertyLimit + 30;
+                return currentPropertyLimit + 70;
             }
 
             return 0;
