@@ -27,14 +27,22 @@ namespace tinder4apartment.Repo
         }
         public async Task<ProviderLoginDto> CreateProvider(ProviderModel providerDetails)
         {
-            Random rn = new Random();
+           var rnd = new RNGCryptoServiceProvider();
+            var sb = new StringBuilder();
+            var buf = new byte[3]; //length: should be larger
+            rnd.GetBytes(buf);
+
+            //gives a "valid" range of: "0123456789ABCDEF"   
+            foreach (byte b in buf)
+                sb.AppendFormat("{0:x2}", b);
              string passwordHash, passwordSalt;
 
+           
             CreatePasswordHash(providerDetails.Password, out passwordHash, out passwordSalt);
 
             providerDetails.PasswordHash = passwordHash;
             providerDetails.PasswordSalt = passwordSalt;
-            providerDetails.LoginId = (rn.Next() * 789).ToString();
+            providerDetails.LoginId = sb.ToString();
   
             
             var imageFileName = providerDetails.imageFile1.FileName;
@@ -49,7 +57,8 @@ namespace tinder4apartment.Repo
 
             return new ProviderLoginDto(){
                 LoginId = providerDetails.LoginId,
-                Password = providerDetails.Password
+                Password = providerDetails.Password,
+                Id = providerDetails.Id
             };
         }
 

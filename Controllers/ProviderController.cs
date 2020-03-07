@@ -16,10 +16,12 @@ namespace tinder4apartment.Controllers
     {
         private readonly IPropertyManager _manager;
         private readonly IProviderRepo _login;
-        public ProviderController(IPropertyManager manager, IProviderRepo login)
+        private readonly ISubscriptionRepo _sub;
+        public ProviderController(IPropertyManager manager, IProviderRepo login, ISubscriptionRepo sub)
         {
             _manager = manager;
             _login = login;
+            _sub = sub;
         }
 
 
@@ -82,6 +84,7 @@ namespace tinder4apartment.Controllers
             return Ok();
         }
 
+         [Authorize]
         [HttpGet("rental/{id}/deactivate")]
         public IActionResult DeactivateRentalProperty([FromRoute]int id)
         {
@@ -89,6 +92,7 @@ namespace tinder4apartment.Controllers
             return Ok();
         }
 
+         [Authorize]
          [HttpGet("industrial/{id}/deactivate")]
         public IActionResult DeactivateIndustrialProperty([FromRoute]int id)
         {
@@ -172,5 +176,84 @@ namespace tinder4apartment.Controllers
             return Ok(result);
         }
 
+        [HttpPost("subscription")]
+        public IActionResult CreateSubscription([FromBody]SubModel submodel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = _sub.Populate(submodel);
+
+            if (result != null)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest("cannot update model data");
+        }
+
+        [HttpGet("subscription/{loginid}")]
+        public IActionResult GetSubscriptionData([FromRoute]string loginId)
+        {
+            var result = _sub.GetUserDataPlan(loginId);
+
+            if(result != null)
+            {
+                return  Ok(result);
+            }    
+            return NotFound("user not found");
+        }
+
+
+        [HttpPost("subscription/propertylimit/{id}")]
+        public async Task<IActionResult> IsPropertyLimitReachedAsync([FromRoute]int id, [FromBody]SubModel sub){
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await  _sub.IsPropertyLimitOver(id, sub);
+
+           return Ok(result);
+        }
+
+
+        [HttpPost("subscription/subscriptionover/{loginId}")]
+        public IActionResult IsSubcriptionOver([FromRoute]string loginId, [FromBody]DuedateClass duedate)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = _sub.IsSubscriptionOver(loginId, duedate.duedate);
+
+            return Ok(result);
+        }
+
+        [HttpPost("subscription/upgrade")]
+        public IActionResult UpgradeSubscription([FromBody]Upgrade upgrade)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+             _sub.UpdateUserData(upgrade.userSubId, upgrade.newPlan);
+
+             return Ok();
+        }
+
+    }
+
+    public class DuedateClass{
+        public string duedate;
+    }
+
+    public class Upgrade{
+        public int userSubId; 
+        public int newPlan;
     }
 }
