@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using server.Core.Models;
 using tinder4apartment.Models;
 
 namespace tinder4apartment.Repo
@@ -224,7 +225,58 @@ namespace tinder4apartment.Repo
             }
         }
 
-       
+        public List<LandPropertyIndex> MatchOnLandProperty(LandPropertyQuery query, List<LandProperty> landProperties)
+        {
+            List<LandPropertyIndex> indexedPropertyList = new List<LandPropertyIndex>();
+
+            landProperties = landProperties.Where(m=> m.State.ToLower() == query.State.ToLower()).ToList();
+
+         
+            foreach (var item in landProperties)
+            {
+               double areaRank = AreaSizeRank(query.area, item.AreaSize);
+                double pricePoint = PriceRank(item.Price, query.minPrice, query.maxPrice);
+              
+                var propertyIndex = new LandPropertyIndex(){
+                    Id = item.Id,
+                    ImageLink1 = item.ImageLink1,
+                    ImageLink2 = item.ImageLink2,
+                    ImageLink3 = item.ImageLink3,
+                    City = item.City,
+                    State = item.State,
+                    Name = item.Name,
+                    Price = item.Price,
+                    IsActive = item.IsActive
+                };
+                
+                propertyIndex.Rank = areaRank + pricePoint;
+
+                if (item.City.ToLower() == query.City.ToLower())
+                {
+                    propertyIndex.Rank = propertyIndex.Rank + locationScore;
+                }
+
+                indexedPropertyList.Add(propertyIndex);
+            }
+
+            return indexedPropertyList;
+        }
+
+        public double AreaSizeRank(double searchArea, double propertyArea)
+        {
+            if(searchArea == propertyArea)
+            {
+                return 2.7;
+            }
+            else if(searchArea < propertyArea)
+            {
+                return 1.08;
+            }
+            else 
+            {
+                return 1.62;
+            }
+        }
     }
 
 
@@ -240,6 +292,11 @@ namespace tinder4apartment.Repo
     }
 
     public class CommercialPropertyIndex: CommercialProperty
+    {
+        public double Rank { get; set; }
+    }
+
+      public class LandPropertyIndex: LandProperty
     {
         public double Rank { get; set; }
     }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using server.Core.Models;
 using tinder4apartment.Models;
 
 namespace tinder4apartment.Repo
@@ -12,5 +13,7 @@ namespace tinder4apartment.Repo
 
 
         List<CommercialPropertyIndex> MatchCommercialProperty(CommercialQuery query, Purpose purpose, List<CommercialProperty> industrials);
+
+        List<LandPropertyIndex> MatchOnLandProperty(LandPropertyQuery query, List<LandProperty> landProperties);
     }
 }

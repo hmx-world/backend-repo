@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using server.Core.Models;
 using tinder4apartment.Models;
 
 namespace tinder4apartment.Repo {
@@ -44,6 +45,27 @@ namespace tinder4apartment.Repo {
         Task<List<string>> GetProviders();
 
         Task<ProviderModel> GetOneProvider(int id);
+
+        Task<LandProperty> AddLandProperty(LandProperty property);
+        Task<List<LandProperty>> GetAllLandProperties();
+        Task<List<LandProperty>> GetAllActiveLandProperties();
+        Task<LandProperty> GetOneLandProperty(int id);
+         Task<List<LandProperty>> GetAllLandPropertiesByFirm(int id);
+        Task<List<LandProperty>> GetAllActiveLandPropertiesByFirm(int id);
+
+
+        Task<RentalProperty> EditRentalProperty(int id, RentalProperty property);
+        Task<OnSaleProperty> EditOnSaleProperty(int id, OnSaleProperty property);
+        Task<CommercialProperty> EditCommercialProperty(int id, CommercialProperty property);
+        Task<LandProperty> EditLandProperty(int id, LandProperty property);
+
+         void AddProviderAction(GoForCheckOrRedirect checkOrRedirect);
+        void AddSearchQueryToLog(string searchQuery, string searchLocation, int queriedFirmId, 
+                PropertyType propertyType, int resultInFirm , int resultInOtherFirms);
+
+        void UpdateSearchQueryToLog(string searchQuery, string searchLocation,
+                PropertyType propertyType, int resultInFirm , int resultInOtherFirms);
+
    
     }
 }

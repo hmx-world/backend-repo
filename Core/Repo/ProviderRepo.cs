@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using server.Core.Models;
 using tinder4apartment.Data;
 using tinder4apartment.Models;
 
@@ -174,8 +175,14 @@ namespace tinder4apartment.Repo
 
             return tokenString;
         }
-        
 
+        public void AddEmergencyProperty(EmergencyProperty emergencyProperty)
+        {
+            _db.EmergencyProperties.Add(emergencyProperty);
+            _db.SaveChangesAsync();
+        }
+
+    
     }
 
 

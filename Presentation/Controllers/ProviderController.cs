@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using server.Core.Models;
 using tinder4apartment.Models;
 using tinder4apartment.Repo;
 
@@ -15,12 +16,12 @@ namespace tinder4apartment.Controllers
     public class ProviderController : ControllerBase
     {
         private readonly IPropertyManager _manager;
-        private readonly IProviderRepo _login;
+        private readonly IProviderRepo _providerRepo;
         private readonly ISubscriptionRepo _sub;
-        public ProviderController(IPropertyManager manager, IProviderRepo login, ISubscriptionRepo sub)
+        public ProviderController(IPropertyManager manager, IProviderRepo providerRepo, ISubscriptionRepo sub)
         {
             _manager = manager;
-            _login = login;
+            _providerRepo= providerRepo;
             _sub = sub;
         }
 
@@ -38,7 +39,7 @@ namespace tinder4apartment.Controllers
             return Ok(await _manager.GetOnSalePropertyByProvider(providerId));
         }
 
-               [Authorize]
+        [Authorize]
         [HttpPost("rental")]
        // [RequestFormLimits(MultipartBodyLengthLimit = long.MaxValue)]
         public async Task<IActionResult> AddRentalProperty([FromForm]RentalProperty property)
@@ -54,7 +55,26 @@ namespace tinder4apartment.Controllers
                 return Ok(result);
             }
 
-            return BadRequest("property is null");
+            return BadRequest();
+        }
+
+        [Authorize]
+        [HttpPut("rental/{id}")]
+       // [RequestFormLimits(MultipartBodyLengthLimit = long.MaxValue)]
+        public async Task<IActionResult> EditRentalProperty([FromRoute]int id, [FromBody]RentalProperty property)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _manager.EditRentalProperty(id, property);
+            if (result != null)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest();
         }
 
          [Authorize]
@@ -73,7 +93,26 @@ namespace tinder4apartment.Controllers
                 return Ok(result);
             }
 
-            return BadRequest("property is null");
+            return BadRequest();
+        }
+
+          [Authorize]
+         [HttpPut("onsale/{id}")]
+       //  [RequestFormLimits(MultipartBodyLengthLimit = long.MaxValue)]
+        public async Task<IActionResult> EditOnSaleProperty([FromRoute]int id, [FromBody]OnSaleProperty property)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _manager.EditOnSaleProperty(id, property);
+            if (result != null)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest();
         }
 
        [Authorize]
@@ -97,6 +136,14 @@ namespace tinder4apartment.Controllers
         public IActionResult DeactivateIndustrialProperty([FromRoute]int id)
         {
             _manager.DeactivateProperty(id, "industrial");
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpGet("landproperty/{id}/deactivate")]
+        public IActionResult DeactivateLandProperty([FromRoute]int id)
+        {
+            _manager.DeactivateProperty(id, "landproperty");
             return Ok();
         }
 
@@ -126,8 +173,73 @@ namespace tinder4apartment.Controllers
                return Ok(result);
             }
 
-            return BadRequest("Request is null");
+            return BadRequest();
         }
+
+         [Authorize]
+        [HttpPut("industrial/{id}")]
+       // [RequestFormLimits(MultipartBodyLengthLimit = long.MaxValue)]
+        public async Task<IActionResult> EditCommercialProperty([FromRoute] int id, [FromBody]CommercialProperty property)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _manager.EditCommercialProperty(id, property);
+            if (result != null)
+            {
+               return Ok(result);
+            }
+
+            return BadRequest();
+        }
+
+        [Authorize]
+        [HttpPost("landproperty")]
+       // [RequestFormLimits(MultipartBodyLengthLimit = long.MaxValue)]
+        public async Task<IActionResult> AddLandProperty([FromForm]LandProperty property)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _manager.AddLandProperty(property);
+            if (result != null)
+            {
+               return Ok(result);
+            }
+
+            return BadRequest();
+        }
+
+        [Authorize]
+        [HttpPut("landproperty/{id}")]
+       // [RequestFormLimits(MultipartBodyLengthLimit = long.MaxValue)]
+        public async Task<IActionResult> EditLandProperty([FromRoute]int id, [FromBody]LandProperty property)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _manager.EditLandProperty(id, property);
+            if (result != null)
+            {
+               return Ok(result);
+            }
+
+            return BadRequest();
+        }
+
+        [Authorize]
+        [HttpGet("land/{providerId}/provider")]
+        public async Task<IActionResult> GetLandPropertyByProvider([FromRoute]int providerId)
+        {
+            return Ok (await _manager.GetIndustrialPropertyByProvider(providerId));
+        }
+
 
         [AllowAnonymous]
         [HttpPost("login")]
@@ -138,7 +250,7 @@ namespace tinder4apartment.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _login.ProviderLogin(loginDto);
+            var result = await _providerRepo.ProviderLogin(loginDto);
             if (result != null)
             {
                 return Ok(result);
@@ -156,12 +268,26 @@ namespace tinder4apartment.Controllers
                 return BadRequest("Provide an id");
             }
 
-            return Ok(await _login.GetProviderDataComplete((int)id));
+            return Ok(await _providerRepo.GetProviderDataComplete((int)id));
+        }
+
+
+        [HttpPost("emergencyProperty")]
+        public IActionResult AddEmergencyProperty([FromBody]EmergencyProperty property)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _providerRepo.AddEmergencyProperty(property);
+
+            return Ok();
+
         }
 
 
 
-        
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromForm]ProviderModel provider)
@@ -171,7 +297,7 @@ namespace tinder4apartment.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _login.CreateProvider(provider);
+            var result = await _providerRepo.CreateProvider(provider);
 
             return Ok(result);
         }

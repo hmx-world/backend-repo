@@ -8,6 +8,7 @@ namespace server.Core.Models
         public int PropertyId { get; set; }
         public FirmAction FirmAction {get; set;}
         public DateTime DateCreated {get; set;}
+        public PropertyType PropertyType { get; set; }
     }
 
     public enum FirmAction{

@@ -19,6 +19,7 @@ namespace tinder4apartment.Data
         public DbSet<SubModel> SubModels {get; set;}
         public DbSet<SearchQueryLog> SearchQueryLogs {get; set;}
         public DbSet<EmergencyProperty> EmergencyProperties {get; set;}
+        public DbSet<LandProperty> LandProperties {get; set;}
         public DbSet<GoForCheckOrRedirect> GoForCheckOrRedirects {get; set;}
       
     }

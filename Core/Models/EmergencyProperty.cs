@@ -8,6 +8,6 @@ namespace server.Core.Models
     }
 
     public enum PropertyType{
-        ResidentialForSale, ResidentialForRent, CommercialForSale, COmmercialForRent, LandProperty
+        ResidentialForSale, ResidentialForRent, CommercialForSale, CommercialForRent, LandProperty
     }
 }
