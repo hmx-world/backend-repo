@@ -7648,11 +7648,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hp\\dotnet repos\\propertyb2b\\tinder4apartment\\tinder4apartment.csproj",
+      "projectUniqueName": "C:\\Users\\hp\\dotnet repos\\work projects\\hmx\\hmxworld-app\\server\\tinder4apartment.csproj",
       "projectName": "tinder4apartment",
-      "projectPath": "C:\\Users\\hp\\dotnet repos\\propertyb2b\\tinder4apartment\\tinder4apartment.csproj",
+      "projectPath": "C:\\Users\\hp\\dotnet repos\\work projects\\hmx\\hmxworld-app\\server\\tinder4apartment.csproj",
       "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hp\\dotnet repos\\propertyb2b\\tinder4apartment\\obj\\",
+      "outputPath": "C:\\Users\\hp\\dotnet repos\\work projects\\hmx\\hmxworld-app\\server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
