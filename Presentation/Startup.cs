@@ -37,9 +37,8 @@ namespace tinder4apartment
         public void ConfigureServices(IServiceCollection services)
         {
          
-        //    services.AddDbContext<PropertyDbContext>(options =>
-        //          options.UseSqlServer(
-        //              Configuration.GetConnectionString("DefaultConnection")));
+           services.AddDbContext<PropertyDbContext>(options =>
+                 options.UseSqlServer("Server=(localdb)\\v11.0;Database=hmxworld-db;Trusted_Connection=True;MultipleActiveResultSets=true"));
 
             // services.AddAuthentication(options => {
             //     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -63,9 +62,10 @@ namespace tinder4apartment
 
             services.AddScoped<IPropertyManager, PropertyManager>();
             services.AddScoped<IMatchRepo, MatchRepo>();
-            services.AddScoped<IProviderRepo, ProviderRepo>();
+            services.AddScoped<IFirmRepo, FirmRepo>();
             services.AddScoped<IBlobRepo, BlobRepo>();
-             services.AddScoped<ISubscriptionRepo, SubscriptionRepo>();
+            //  services.AddScoped<ISubscriptionRepo, SubscriptionRepo>();
+            
 
             //services.AddSwaggerDocument(); 
 
@@ -75,7 +75,9 @@ namespace tinder4apartment
                 options.MultipartHeadersLengthLimit = int.MaxValue;
             });
 
-             var key = Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value);
+           
+
+             var key = Encoding.ASCII.GetBytes("SOME RANDOM WORD FOR TOKEN GENERATION");
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
                 options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters {
                     ValidateIssuerSigningKey = true,

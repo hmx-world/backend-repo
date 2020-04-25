@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using server.Core.Models;
+using server.Presentation.Helpers;
 using tinder4apartment.Models;
 using tinder4apartment.Repo;
 
@@ -15,10 +16,12 @@ namespace tinder4apartment.Controllers
     {
         private readonly IPropertyManager _manager;
         private readonly IMatchRepo _match;
+        private MatchHelper _matchHelper;
         public PropertyController(IPropertyManager manager, IMatchRepo match)
         {
             _manager = manager;
             _match = match;
+            _matchHelper = new MatchHelper(match, manager);
         }
       
         [HttpGet("active/rental/all")]
@@ -66,127 +69,69 @@ namespace tinder4apartment.Controllers
             return Ok(property);
         }
 
-        [HttpGet("active/rental/{providerId}/provider")]
-        public async Task<IActionResult> GetActiveRentalPropertyByProvider([FromRoute]int? providerId)
+        [HttpGet("active/rental/{firmId}/firm")]
+        public async Task<IActionResult> GetActiveRentalPropertyByProvider([FromRoute]int? firmId)
         {
-             if (providerId == null)
+             if (firmId == null)
             {
-                return BadRequest("Provide an provider id");
+                return BadRequest("Provide an firm id");
             }
-            return Ok(await _manager.GetActiveRentalPropertyByProvider((int)providerId));
-        }
+            var result = await _manager.GetActiveRentalPropertyByProvider((int)firmId);
 
-        [HttpGet("active/onsale/{providerId}/provider")]
-        public async Task<IActionResult> GetActiveOnSalePropertyByProvider([FromRoute]int? providerId)
-        {
-              if (providerId == null)
+            if(result == null)
             {
-                return BadRequest("Provide an provider id");
-            }
-            return Ok(await _manager.GetActiveOnSalePropertyByProvider((int)providerId));
-        }
-
-
-        [HttpPost("active/rental/match/{providerId}")]
-        public async Task<IActionResult> MatchRentalPropertyByProvider([FromRoute]int providerId, [FromBody]UserQuery query)
-        {
-            if(!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var propertyList = await _manager.GetActiveRentalPropertyByProvider(providerId);
-
-            var result = _match.MatchRentalProperty(query, propertyList);
-
-            string stringQuery = $"Number of occupants: {query.NumberofAdult + query.NumberofChildren}. max price: {query.maxPrice}, min price: {query.minPrice}";
-            string location = $"{query.City}, {query.State}";
-            _manager.AddSearchQueryToLog(stringQuery, location,providerId, PropertyType.ResidentialForRent, result.Count, 0);
-
-            return Ok(result.OrderByDescending(m => m.Rank));
-        }
-
-        [HttpPost("active/onsale/match/{providerId}")]
-        public async Task<IActionResult> MatchOnSalePropertyByProvider([FromRoute]int providerId, [FromBody]UserQuery query)
-        {
-            if(!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
+                return NotFound();
             }
 
-            var propertyList = await _manager.GetActiveOnSalePropertyByProvider(providerId);
-
-            var result = _match.MatchOnSaleProperty(query, propertyList);
-
-            string stringQuery = $"Number of occupants: {query.NumberofAdult + query.NumberofChildren}. max price: {query.maxPrice}, min price: {query.minPrice}";
-            string location = $"{query.City}, {query.State}";
-            _manager.AddSearchQueryToLog(stringQuery, location,providerId, PropertyType.ResidentialForSale, result.Count, 0);
-
-            return Ok(result.OrderByDescending(m => m.Rank));
+            return Ok(result);
         }
 
-
-         [HttpPost("active/rental/match")]
-        public async Task<IActionResult> MatchRentalProperty([FromBody]UserQuery query)
+        [HttpGet("active/onsale/{firmId}/firm")]
+        public async Task<IActionResult> GetActiveOnSalePropertyByProvider([FromRoute]int? firmId)
         {
-            if(!ModelState.IsValid)
+              if (firmId == null)
             {
-                return BadRequest(ModelState);
+                return BadRequest("Provide an firm id");
             }
-            var propertyList = await _manager.GetAllActiveRentalProperty();
+            var result = await _manager.GetActiveOnSalePropertyByProvider((int)firmId);
 
-            var result = _match.MatchRentalProperty(query, propertyList);
-
-            string stringQuery = $"Number of occupants: {query.NumberofAdult + query.NumberofChildren}. max price: {query.maxPrice}, min price: {query.minPrice}";
-            string location = $"{query.City}, {query.State}";
-            _manager.UpdateSearchQueryToLog(stringQuery, location, PropertyType.ResidentialForRent,0, result.Count);
-
-            return Ok(result.OrderByDescending(m => m.Rank));
-        }
-
-        [HttpPost("active/onsale/match")]
-        public async Task<IActionResult> MatchOnSaleProperty([FromBody]UserQuery query)
-        {
-            if(!ModelState.IsValid)
+            if(result == null)
             {
-                return BadRequest(ModelState);
+                return NotFound();
             }
 
-            var propertyList = await _manager.GetAllActiveOnSaleProperty();
-
-            var result = _match.MatchOnSaleProperty(query, propertyList);
-
-            string stringQuery = $"Number of occupants: {query.NumberofAdult + query.NumberofChildren}. max price: {query.maxPrice}, min price: {query.minPrice}";
-            string location = $"{query.City}, {query.State}";
-            _manager.UpdateSearchQueryToLog(stringQuery, location, PropertyType.ResidentialForSale,0, result.Count);
-
-            return Ok(result.OrderByDescending(m => m.Rank));
+            return Ok(result);
         }
-
-
-
-
-        [HttpGet("active/industrial/all")]
+ 
+        [HttpGet("active/commercial/all")]
         public async Task<IActionResult> GetIndustrialProperty()
         {
             return Ok (await _manager.GetActiveIndustrialProperty());
         }
 
-        [HttpGet("active/industrial/{providerId}/provider")]
-        public async Task<IActionResult> GetIndustrialPropertyByProvider([FromRoute]int? providerId)
+        [HttpGet("active/commercial/{firmId}/firm")]
+        public async Task<IActionResult> GetIndustrialPropertyByProvider([FromRoute]int? firmId)
         {
-            if(providerId == null)
+            if(firmId == null)
             {
-                return BadRequest("provide a provider id");
+                return BadRequest("provide a firm id");
             }
-            return Ok (await _manager.GetActiveIndustrialPropertyByProvider((int)providerId));
+            var result = await _manager.GetActiveIndustrialPropertyByProvider((int)firmId);
+
+            if(result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
         }
 
-         [HttpGet("industrial/{id}")]
+         [HttpGet("commercial/{id}")]
         public async Task<IActionResult> GetOneIndustrialProperty([FromRoute]int? id)
         {
             if(id == null)
             {
-                return BadRequest("provide a provider id");
+                return BadRequest("provide a id");
             }
             var property = await _manager.GetOneIndustrialProperty((int)id);
             if(property == null)
@@ -198,81 +143,169 @@ namespace tinder4apartment.Controllers
         }
 
 
-        [HttpPost("active/industrial/rent/match/{providerId}")]
-        public async Task<IActionResult> MatchIndustrialRentalPropertyByProvider([FromRoute]int providerId, [FromBody]CommercialQuery query)
+          [HttpGet("active/landproperties/all")]
+        public async Task<IActionResult> GetActiveLandProperty()
+        {
+            return Ok(await _manager.GetAllActiveLandProperties());
+        }
+
+        [HttpGet("active/landproperties/{firmId}/firm")]
+        public async Task<IActionResult> GetActiveLandPropertyByProvider([FromRoute]int? firmId)
+        {
+            if(firmId == null)
+            {
+                return BadRequest("provide a firm id");
+            }
+            var result = await _manager.GetAllActiveLandPropertiesByFirm((int)firmId);
+
+            if(result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
+
+        [HttpGet("landproperty/{id}")]
+        public async Task<IActionResult> GetOneLandProperty([FromRoute]int? id)
+        {
+            if(id == null)
+            {
+                return BadRequest("provide a id");
+            }   
+            var property = await _manager.GetOneLandProperty((int)id);
+            if(property == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(property);
+        }
+
+
+#region match
+
+        [HttpPost("residential/match/{firmId:int?}")]
+        public async Task<IActionResult> MatchResidential([FromRoute]int? firmId, [FromBody]UserQuery query)
+        {
+            if(firmId == null)
+            {
+                return await MatchResidentialProperty(query);
+            }
+            else{
+                return await MatchResidentialPropertyByFirm((int)firmId, query);
+            }
+        }
+
+      
+        public async Task<IActionResult> MatchResidentialPropertyByFirm([FromRoute]int firmId, [FromBody]UserQuery query)
         {
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var propertyList = await _manager.GetActiveIndustrialPropertyByProvider(providerId);
-
-            var result = _match.MatchCommercialProperty(query, Purpose.Rent, propertyList);
-
-            string stringQuery = $"Number of rooms: {query.NumberOfRooms}. max price: {query.maxPrice}, min price: {query.minPrice}";
-            string location = $"{query.City}, {query.State}";
-            _manager.AddSearchQueryToLog(stringQuery, location,providerId, PropertyType.CommercialForRent, result.Count, 0);
-
-            return Ok(result.OrderByDescending(m => m.Rank));
+            else{
+                switch (query.purpose)
+                {
+                    case Purpose.Rent:
+                        return Ok(await _matchHelper.MatchRentalPropertyByFirm(firmId, query));
+                    case Purpose.Sale: 
+                        return Ok(await _matchHelper.MatchOnSalePropertyByFirm(firmId, query));
+                    default:
+                        return Ok(await _matchHelper.MatchRentalPropertyByFirm(firmId, query));
+                }
+            }
         }
 
-        [HttpPost("active/industrial/sale/match/{providerId}")]
-        public async Task<IActionResult> MatchIndustrialSalePropertyByProvider([FromRoute]int providerId, [FromBody]CommercialQuery query)
+       
+        public async Task<IActionResult> MatchResidentialProperty([FromBody]UserQuery query)
         {
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var propertyList = await _manager.GetActiveIndustrialPropertyByProvider(providerId);
-
-            var result = _match.MatchCommercialProperty(query, Purpose.Sale, propertyList);
-
-             string stringQuery = $"Number of rooms: {query.NumberOfRooms}. max price: {query.maxPrice}, min price: {query.minPrice}";
-            string location = $"{query.City}, {query.State}";
-            _manager.AddSearchQueryToLog(stringQuery, location,providerId, PropertyType.CommercialForRent, result.Count, 0);
-
-            return Ok(result.OrderByDescending(m => m.Rank));
+            else{
+                switch (query.purpose)
+                {
+                    case Purpose.Rent:
+                        return Ok(await _matchHelper.MatchRentalProperty(query));
+                    case Purpose.Sale: 
+                        return Ok(await _matchHelper.MatchOnSaleProperty(query));
+                    default:
+                        return Ok(await _matchHelper.MatchRentalProperty(query));
+                }
+            }
         }
 
-
-        [HttpPost("active/industrial/rent/match")]
-        public async Task<IActionResult> MatchIndustrialRentalProperty( [FromBody]CommercialQuery query)
+        [HttpPost("commercial/match/{firmId:int?}")]
+        public async Task<IActionResult> MatchCommercial([FromRoute]int? firmId, [FromBody]CommercialQuery query)
         {
-              if(!ModelState.IsValid)
+            if(firmId == null)
+            {
+                return await MatchCommercialProperty(query);
+            }
+            else{
+                return await MatchCommercialPropertyByFirm((int)firmId, query);
+            }
+        }
+
+      
+        public async Task<IActionResult> MatchCommercialPropertyByFirm([FromRoute]int firmId, [FromBody]CommercialQuery query)
+        {
+            if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var propertyList = await _manager.GetActiveIndustrialProperty();
+            else{
+                switch (query.purpose)
+                {
+                    case Purpose.Rent:
+                        return Ok(await _matchHelper.MatchCommercialRentalPropertyByFirm(firmId, query));
+                    case Purpose.Sale: 
+                        return Ok(await _matchHelper.MatchCommercialSalePropertyByFirm(firmId, query));
+                    default:
+                        return  Ok(await _matchHelper.MatchCommercialRentalPropertyByFirm(firmId, query));
+                }
+            }
 
-            var result = _match.MatchCommercialProperty(query, Purpose.Rent, propertyList);
-
-             string stringQuery = $"Number of rooms: {query.NumberOfRooms}. max price: {query.maxPrice}, min price: {query.minPrice}";
-            string location = $"{query.City}, {query.State}";
-            _manager.UpdateSearchQueryToLog(stringQuery, location, PropertyType.CommercialForRent,  0, result.Count);
-
-            return Ok(result.OrderByDescending(m => m.Rank));
         }
-
-        [HttpPost("active/industrial/sale/match")]
-        public async Task<IActionResult> MatchIndustrialSaleProperty([FromBody]CommercialQuery query)
+        
+        public async Task<IActionResult> MatchCommercialProperty([FromBody]CommercialQuery query)
         {
-              if(!ModelState.IsValid)
+            if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var propertyList = await _manager.GetActiveIndustrialProperty();
+            else{
+                switch (query.purpose)
+                {
+                    case Purpose.Rent:
+                        return Ok(await _matchHelper.MatchCommercialRentalProperty(query));
+                    case Purpose.Sale: 
+                        return Ok(await _matchHelper.MatchCommercialSaleProperty(query));
+                    default:
+                        return  Ok(await _matchHelper.MatchCommercialRentalProperty(query));
+                }
+            }
 
-            var result = _match.MatchCommercialProperty(query, Purpose.Sale, propertyList);
-
-            string stringQuery = $"Number of rooms: {query.NumberOfRooms}. max price: {query.maxPrice}, min price: {query.minPrice}";
-            string location = $"{query.City}, {query.State}";
-            _manager.UpdateSearchQueryToLog(stringQuery, location, PropertyType.CommercialForSale, 0, result.Count);
-
-            return Ok(result.OrderByDescending(m => m.Rank));
         }
 
-        [HttpPost("active/Land/sale/match")]
-        public async Task<IActionResult> MatchLandProperty([FromBody]LandPropertyQuery query)
+
+         [HttpPost("landproperty/match/{firmId:int?}")]
+        public async Task<IActionResult> MatchLandProperty([FromRoute]int? firmId, [FromBody]LandPropertyQuery query)
+        {
+            if(firmId == null)
+            {
+                return await MatchLandProperty(query);
+            }
+            else{
+                return await MatchLandPropertyByFirm((int)firmId, query);
+            }
+        }
+
+
+  
+        public async Task<IActionResult> MatchLandProperty(LandPropertyQuery query)
         {
               if(!ModelState.IsValid)
             {
@@ -288,57 +321,31 @@ namespace tinder4apartment.Controllers
 
             return Ok(result.OrderByDescending(m => m.Rank));
         }
-
-        [HttpPost("active/Land/sale/match/{providerId}")]
-        public async Task<IActionResult> MatchLandPropertyByProvider([FromRoute]int providerId, [FromBody]LandPropertyQuery query)
+        public async Task<IActionResult> MatchLandPropertyByFirm(int firmId, LandPropertyQuery query)
         {
               if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var propertyList = await _manager.GetAllActiveLandPropertiesByFirm(providerId);
+            var propertyList = await _manager.GetAllActiveLandPropertiesByFirm(firmId);
 
             var result = _match.MatchOnLandProperty(query, propertyList);
 
             
              string stringQuery = $"Land Area: {query.area}. max price: {query.maxPrice}, min price: {query.minPrice}";
             string location = $"{query.City}, {query.State}";
-            _manager.AddSearchQueryToLog(stringQuery, location,providerId, PropertyType.CommercialForRent, result.Count, 0);
+            _manager.AddSearchQueryToLog(stringQuery, location,firmId, PropertyType.LandProperty, result.Count, 0);
 
             return Ok(result.OrderByDescending(m => m.Rank));
         }
 
-        [HttpGet("active/landproperties/all")]
-        public async Task<IActionResult> GetActiveLandProperty()
-        {
-            return Ok(await _manager.GetAllActiveLandProperties());
-        }
 
-        [HttpGet("active/landproperties/{providerId}/provider")]
-        public async Task<IActionResult> GetActiveLandPropertyByProvider([FromRoute]int? providerId)
-        {
-            if(providerId == null)
-            {
-                return BadRequest("provide a provider id");
-            }
-            return Ok(await _manager.GetAllActiveLandPropertiesByFirm((int)providerId));
-        }
+      
+      
+#endregion
 
-        [HttpGet("landproperty/{id}")]
-        public async Task<IActionResult> GetOneLandProperty([FromRoute]int? id)
-        {
-            if(id == null)
-            {
-                return BadRequest("provide a provider id");
-            }   
-            var property = await _manager.GetOneLandProperty((int)id);
-            if(property == null)
-            {
-                return NotFound();
-            }
 
-            return Ok(property);
-        }
+       
 
 
         [HttpPost("provider-action")]
@@ -355,14 +362,14 @@ namespace tinder4apartment.Controllers
         }
 
 
-        [HttpGet("providers")]
-        public async Task<IActionResult> GetProvidersName()
+        [HttpGet("firms")]
+        public async Task<IActionResult> GetFirmsName()
         {
             return Ok(await _manager.GetProviders());
         }
 
-        [HttpGet("provider/{id}")]
-        public async Task<IActionResult> GetOneProvider([FromRoute]int id)
+        [HttpGet("firm/{id}")]
+        public async Task<IActionResult> GetOneFirm([FromRoute]int id)
         {
             return Ok( await _manager.GetOneProvider(id));
         }

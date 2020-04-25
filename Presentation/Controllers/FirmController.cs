@@ -13,12 +13,12 @@ namespace tinder4apartment.Controllers
     [Produces("application/json")]  
     [ApiController]
     [Route("api/[controller]")]
-    public class ProviderController : ControllerBase
+    public class FirmController : ControllerBase
     {
         private readonly IPropertyManager _manager;
-        private readonly IProviderRepo _providerRepo;
+        private readonly IFirmRepo _providerRepo;
         private readonly ISubscriptionRepo _sub;
-        public ProviderController(IPropertyManager manager, IProviderRepo providerRepo, ISubscriptionRepo sub)
+        public FirmController(IPropertyManager manager, IFirmRepo providerRepo, ISubscriptionRepo sub)
         {
             _manager = manager;
             _providerRepo= providerRepo;
@@ -27,16 +27,16 @@ namespace tinder4apartment.Controllers
 
 
                [Authorize]
-         [HttpGet("rental/{providerId}/provider")]
-        public async Task<IActionResult> GetRentalPropertyByProvider([FromRoute]int providerId)
+         [HttpGet("rental/{firmId}/firm")]
+        public async Task<IActionResult> GetRentalPropertyByProvider([FromRoute]int firmId)
         {
-            return Ok(await _manager.GetRentalPropertyByProvider(providerId));
+            return Ok(await _manager.GetRentalPropertyByProvider(firmId));
         }
 
-        [HttpGet("onsale/{providerId}/provider")]
-        public async Task<IActionResult> GetOnSalePropertyByProvider([FromRoute]int providerId)
+        [HttpGet("onsale/{firmId}/firm")]
+        public async Task<IActionResult> GetOnSalePropertyByProvider([FromRoute]int firmId)
         {
-            return Ok(await _manager.GetOnSalePropertyByProvider(providerId));
+            return Ok(await _manager.GetOnSalePropertyByProvider(firmId));
         }
 
         [Authorize]
@@ -132,7 +132,7 @@ namespace tinder4apartment.Controllers
         }
 
          [Authorize]
-         [HttpGet("industrial/{id}/deactivate")]
+         [HttpGet("commercial/{id}/deactivate")]
         public IActionResult DeactivateIndustrialProperty([FromRoute]int id)
         {
             _manager.DeactivateProperty(id, "industrial");
@@ -150,17 +150,17 @@ namespace tinder4apartment.Controllers
 
       
        [Authorize]
-        [HttpGet("industrial/{providerId}/provider")]
-        public async Task<IActionResult> GetIndustrialPropertyByProvider([FromRoute]int providerId)
+        [HttpGet("commercial/{firmId}/firm")]
+        public async Task<IActionResult> GetIndustrialPropertyByProvider([FromRoute]int firmId)
         {
-            return Ok (await _manager.GetIndustrialPropertyByProvider(providerId));
+            return Ok (await _manager.GetIndustrialPropertyByProvider(firmId));
         }
 
         
         [Authorize]
-        [HttpPost("industrial")]
+        [HttpPost("commercial")]
        // [RequestFormLimits(MultipartBodyLengthLimit = long.MaxValue)]
-        public async Task<IActionResult> AddIndustrialProperty([FromForm]CommercialProperty property)
+        public async Task<IActionResult> AddCommercialProperty([FromForm]CommercialProperty property)
         {
             if (!ModelState.IsValid)
             {
@@ -177,7 +177,7 @@ namespace tinder4apartment.Controllers
         }
 
          [Authorize]
-        [HttpPut("industrial/{id}")]
+        [HttpPut("commercial/{id}")]
        // [RequestFormLimits(MultipartBodyLengthLimit = long.MaxValue)]
         public async Task<IActionResult> EditCommercialProperty([FromRoute] int id, [FromBody]CommercialProperty property)
         {
@@ -234,23 +234,23 @@ namespace tinder4apartment.Controllers
         }
 
         [Authorize]
-        [HttpGet("land/{providerId}/provider")]
-        public async Task<IActionResult> GetLandPropertyByProvider([FromRoute]int providerId)
+        [HttpGet("landproperty/{firmId}/firm")]
+        public async Task<IActionResult> GetLandPropertyByProvider([FromRoute]int firmId)
         {
-            return Ok (await _manager.GetIndustrialPropertyByProvider(providerId));
+            return Ok (await _manager.GetIndustrialPropertyByProvider(firmId));
         }
 
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody]ProviderLoginDto loginDto)
+        public async Task<IActionResult> Login([FromBody]FirmLoginDto loginDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var result = await _providerRepo.ProviderLogin(loginDto);
+            var result = await _providerRepo.FirmLogin(loginDto);
             if (result != null)
             {
                 return Ok(result);
@@ -268,7 +268,7 @@ namespace tinder4apartment.Controllers
                 return BadRequest("Provide an id");
             }
 
-            return Ok(await _providerRepo.GetProviderDataComplete((int)id));
+            return Ok(await _providerRepo.GetFirmDataComplete((int)id));
         }
 
 
@@ -290,14 +290,14 @@ namespace tinder4apartment.Controllers
 
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromForm]ProviderModel provider)
+        public async Task<IActionResult> Register([FromForm]Firm provider)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var result = await _providerRepo.CreateProvider(provider);
+            var result = await _providerRepo.CreateFirm(provider);
 
             return Ok(result);
         }

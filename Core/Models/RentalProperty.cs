@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace tinder4apartment.Models
 {
@@ -11,8 +12,9 @@ namespace tinder4apartment.Models
          [Required]
         public bool WaterSupply { get; set; }
 
-        public virtual ProviderModel ProviderModel { get; set; }
-        public int ProviderModelId { get; set; }
+        public virtual Firm Firm { get; set; }
+        
+        public int FirmId { get; set; }
 
         public bool RefundableCautionDeposit {get; set; }
 

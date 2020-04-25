@@ -14,6 +14,6 @@ namespace tinder4apartment.Models
 
     public enum Plan
     {
-        Trial, Basic, Premium
+        Business, Pro , Premium
     }
 }

@@ -44,7 +44,7 @@ namespace tinder4apartment.Repo {
     
         Task<List<string>> GetProviders();
 
-        Task<ProviderModel> GetOneProvider(int id);
+        Task<Firm> GetOneProvider(int id);
 
         Task<LandProperty> AddLandProperty(LandProperty property);
         Task<List<LandProperty>> GetAllLandProperties();

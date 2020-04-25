@@ -26,40 +26,23 @@ namespace tinder4apartment.Repo
             if (property != null)
             {
                 property.IsActive = true;
-                
-                var image = property.imageFile1;
 
-                var imageFileName = image.FileName;
-                string imageMimeType = image.ContentType;
-                byte[] imageData = GetBytes(property.imageFile1);
+                IFormFile[] files = new IFormFile[]{property.imageFile1, property.imageFile2, property.imageFile3, property.imageFile4};
+                string[] fileLinks = new string[]{property.ImageLink1, property.ImageLink2, property.ImageLink3, property.ImageLink4};
 
-                property.ImageLink1 = _blob.UploadFileToBlob(imageFileName, imageData, imageMimeType);
-
-                var image1 = property.imageFile2;
-
-                var imageFileName2 = image1.FileName;
-                string imageMimeType2 = image1.ContentType;
-                byte[] imageData2 = GetBytes(image1);
-
-                property.ImageLink2 = _blob.UploadFileToBlob(imageFileName2, imageData2, imageMimeType2);
-
-                var image2 = property.imageFile3;
-
-                var imageFileName3 = image2.FileName;
-                string imageMimeType3 = image2.ContentType;
-                byte[] imageData3 = GetBytes(image2);
-
-                property.ImageLink3 = _blob.UploadFileToBlob(imageFileName3, imageData3, imageMimeType3);
-
-                 var videoFile = property.imageFile4;
-
-                var videoFileName = videoFile.FileName;
-                string videoFileMimeType = videoFile.ContentType;
-                byte[] videoFileData = GetBytes(videoFile);
-
-                property.ImageLink4 = _blob.UploadFileToBlob(videoFileName, videoFileData, videoFileMimeType);
-
-
+                for (int i = 0; i < files.Length; i++)
+                {
+                    if(files[i] == null)
+                    {
+                        fileLinks[i] = "#";
+                    }
+                     else {fileLinks[i] = GetFileUploadBlobReturnsLink(files[i]);}
+                }
+                property.ImageLink1 = fileLinks[0];
+                property.ImageLink2 = fileLinks[1];
+                property.ImageLink3 = fileLinks[2];
+                property.ImageLink4 = fileLinks[3];
+            
 
                 _db.OnSaleProperties.Add(property);
                 await _db.SaveChangesAsync();
@@ -74,39 +57,55 @@ namespace tinder4apartment.Repo
         {
              if (property != null)
             {
-                 property.IsActive = true;
+                property.IsActive = true;
                 
-                var image = property.imageFile1;
+                IFormFile[] files = new IFormFile[]{property.imageFile1, property.imageFile2, property.imageFile3, property.imageFile4};
+                string[] fileLinks = new string[]{property.ImageLink1, property.ImageLink2, property.ImageLink3, property.ImageLink4};
 
-                var imageFileName = image.FileName;
-                string imageMimeType = image.ContentType;
-                byte[] imageData = GetBytes(property.imageFile1);
+                for (int i = 0; i < files.Length; i++)
+                {
+                    if(files[i] == null)
+                    {
+                        fileLinks[i] = "#";
+                    }
+                     else {fileLinks[i] = GetFileUploadBlobReturnsLink(files[i]);}
+                }
+                property.ImageLink1 = fileLinks[0];
+                property.ImageLink2 = fileLinks[1];
+                property.ImageLink3 = fileLinks[2];
+                property.ImageLink4 = fileLinks[3];
+                
+            //     var image = property.imageFile1;
 
-                property.ImageLink1 = _blob.UploadFileToBlob(imageFileName, imageData, imageMimeType);
+            //     var imageFileName = image.FileName;
+            //     string imageMimeType = image.ContentType;
+            //     byte[] imageData = GetBytes(property.imageFile1);
 
-                var image1 = property.imageFile2;
+            //    // property.ImageLink1 = _blob.UploadFileToBlob(imageFileName, imageData, imageMimeType);
 
-                var imageFileName2 = image1.FileName;
-                string imageMimeType2 = image1.ContentType;
-                byte[] imageData2 = GetBytes(image1);
+            //     var image1 = property.imageFile2;
 
-                property.ImageLink2 = _blob.UploadFileToBlob(imageFileName2, imageData2, imageMimeType2);
+            //     var imageFileName2 = image1.FileName;
+            //     string imageMimeType2 = image1.ContentType;
+            //     byte[] imageData2 = GetBytes(image1);
 
-                var image2 = property.imageFile3;
+            //    // property.ImageLink2 = _blob.UploadFileToBlob(imageFileName2, imageData2, imageMimeType2);
 
-                var imageFileName3 = image2.FileName;
-                string imageMimeType3 = image2.ContentType;
-                byte[] imageData3 = GetBytes(image2);
+            //     var image2 = property.imageFile3;
 
-                property.ImageLink3 = _blob.UploadFileToBlob(imageFileName3, imageData3, imageMimeType3);
+            //     var imageFileName3 = image2.FileName;
+            //     string imageMimeType3 = image2.ContentType;
+            //     byte[] imageData3 = GetBytes(image2);
 
-                 var videoFile = property.imageFile4;
+            //     //property.ImageLink3 = _blob.UploadFileToBlob(imageFileName3, imageData3, imageMimeType3);
 
-                var videoFileName = videoFile.FileName;
-                string videoFileMimeType = videoFile.ContentType;
-                byte[] videoFileData = GetBytes(videoFile);
+            //      var videoFile = property.imageFile4;
 
-                property.ImageLink4 = _blob.UploadFileToBlob(videoFileName, videoFileData, videoFileMimeType);
+            //     var videoFileName = videoFile.FileName;
+            //     string videoFileMimeType = videoFile.ContentType;
+            //     byte[] videoFileData = GetBytes(videoFile);
+
+                //property.ImageLink4 = _blob.UploadFileToBlob(videoFileName, videoFileData, videoFileMimeType);
                 _db.RentalProperties.Add(property);
                 await _db.SaveChangesAsync();
 
@@ -118,12 +117,24 @@ namespace tinder4apartment.Repo
 
         public async Task<OnSaleProperty> GetOneOnSaleProperty(int id)
         {
-            return await _db.OnSaleProperties.FirstOrDefaultAsync(m=> m.Id == id);
+            var property =  await _db.OnSaleProperties.Include(m => m.Firm).FirstOrDefaultAsync(m => m.Id == id);
+            property.Firm.LandProperties = null;
+            property.Firm.RentalProperties = null;
+            property.Firm.CommercialProperty = null;
+            property.Firm.OnSaleProperties = null;
+
+            return property;
         }
 
         public async Task<RentalProperty> GetOneRentalProperty(int id)
         {
-            return await _db.RentalProperties.FirstOrDefaultAsync(m=> m.Id == id);
+            var property =  await _db.RentalProperties.Include(m => m.Firm).FirstOrDefaultAsync(m => m.Id == id);
+            property.Firm.LandProperties = null;
+            property.Firm.RentalProperties = null;
+            property.Firm.CommercialProperty = null;
+            property.Firm.OnSaleProperties = null;
+
+            return property;
         }
 
         public async Task<List<OnSaleProperty>> GetAllActiveOnSaleProperty()
@@ -133,7 +144,7 @@ namespace tinder4apartment.Repo
 
         public async Task<List<OnSaleProperty>> GetActiveOnSalePropertyByProvider(int providerId)
         {
-            return await _db.OnSaleProperties.Where(m => m.ProviderModelId == providerId && m.IsActive == true).ToListAsync();
+            return await _db.OnSaleProperties.Where(m => m.FirmId == providerId && m.IsActive == true).ToListAsync();
         }
 
         public async Task<List<RentalProperty>> GetAllActiveRentalProperty()
@@ -143,7 +154,7 @@ namespace tinder4apartment.Repo
 
         public async Task<List<RentalProperty>> GetActiveRentalPropertyByProvider(int providerId)
         {
-            return await _db.RentalProperties.Where(m => m.ProviderModelId == providerId && m.IsActive == true ).ToListAsync();
+            return await _db.RentalProperties.Where(m => m.FirmId == providerId && m.IsActive == true ).ToListAsync();
         }
 
         public void DeactivateProperty(int id, string purpose)
@@ -190,51 +201,37 @@ namespace tinder4apartment.Repo
 
         public async Task<List<RentalProperty>> GetRentalPropertyByProvider(int providerId)
         {
-            return await _db.RentalProperties.Where(m => m.ProviderModelId== providerId).ToListAsync();
+            return await _db.RentalProperties.Where(m => m.FirmId == providerId).ToListAsync();
         }
 
         public async Task<List<OnSaleProperty>> GetOnSalePropertyByProvider(int providerId)
         {
-            return await _db.OnSaleProperties.Where(m => m.ProviderModelId == providerId).ToListAsync();
+            return await _db.OnSaleProperties.Where(m => m.FirmId == providerId).ToListAsync();
         }
 
         public async Task<CommercialProperty> AddIndustrialProperty(CommercialProperty property)
         {
              if (property != null)
             {
-                 property.IsActive = true;
+                property.IsActive = true;
                 
-                var image = property.imageFile1;
+                IFormFile[] files = new IFormFile[]{property.imageFile1, property.imageFile2, property.imageFile3, property.imageFile4};
+                string[] fileLinks = new string[]{property.ImageLink1, property.ImageLink2, property.ImageLink3, property.ImageLink4};
 
-                var imageFileName = image.FileName;
-                string imageMimeType = image.ContentType;
-                byte[] imageData = GetBytes(property.imageFile1);
+                for (int i = 0; i < files.Length; i++)
+                {
+                    if(files[i] == null)
+                    {
+                        fileLinks[i] = "#";
+                    }
+                     else {fileLinks[i] = GetFileUploadBlobReturnsLink(files[i]);}
+                }
 
-                property.ImageLink1 = _blob.UploadFileToBlob(imageFileName, imageData, imageMimeType);
+                property.ImageLink1 = fileLinks[0];
+                property.ImageLink2 = fileLinks[1];
+                property.ImageLink3 = fileLinks[2];
+                property.ImageLink4 = fileLinks[3];
 
-                var image1 = property.imageFile2;
-
-                var imageFileName2 = image1.FileName;
-                string imageMimeType2 = image1.ContentType;
-                byte[] imageData2 = GetBytes(image1);
-
-                property.ImageLink2 = _blob.UploadFileToBlob(imageFileName2, imageData2, imageMimeType2);
-
-                var image2 = property.imageFile3;
-
-                var imageFileName3 = image2.FileName;
-                string imageMimeType3 = image2.ContentType;
-                byte[] imageData3 = GetBytes(image2);
-
-                property.ImageLink3 = _blob.UploadFileToBlob(imageFileName3, imageData3, imageMimeType3);
-
-                 var videoFile = property.imageFile4;
-
-                var videoFileName = videoFile.FileName;
-                string videoFileMimeType = videoFile.ContentType;
-                byte[] videoFileData = GetBytes(videoFile);
-
-                property.ImageLink4 = _blob.UploadFileToBlob(videoFileName, videoFileData, videoFileMimeType);
                 _db.CommercialProperties.Add(property);
                 await _db.SaveChangesAsync();
 
@@ -251,12 +248,18 @@ namespace tinder4apartment.Repo
 
         public async Task<List<CommercialProperty>> GetIndustrialPropertyByProvider(int providerId)
         {
-            return await _db.CommercialProperties.Where(m => m.ProviderModelId == providerId).ToListAsync();
+            return await _db.CommercialProperties.Where(m => m.FirmId == providerId).ToListAsync();
         }
 
         public async Task<CommercialProperty> GetOneIndustrialProperty(int id)
         {
-            return await _db.CommercialProperties.FirstOrDefaultAsync(m => m.Id == id);
+             var property =  await _db.CommercialProperties.Include(m => m.Firm).FirstOrDefaultAsync(m => m.Id == id);
+            property.Firm.LandProperties = null;
+            property.Firm.RentalProperties = null;
+            property.Firm.CommercialProperty = null;
+            property.Firm.OnSaleProperties = null;
+
+            return property;
         }
 
         public async Task<List<CommercialProperty>> GetActiveIndustrialProperty()
@@ -266,12 +269,12 @@ namespace tinder4apartment.Repo
 
         public async Task<List<CommercialProperty>> GetActiveIndustrialPropertyByProvider(int providerId)
         {
-            return await _db.CommercialProperties.Where(m => m.ProviderModelId == providerId && m.IsActive == true).ToListAsync();
+            return await _db.CommercialProperties.Where(m => m.FirmId == providerId && m.IsActive == true).ToListAsync();
         }
 
         public async Task<List<string>> GetProviders()
         {
-            return await _db.ProviderModels.Select(m => m.Name).ToListAsync();
+            return await _db.Firms.Select(m => m.Name).ToListAsync();
         }
 
         public static byte[] GetBytes(IFormFile file)
@@ -283,9 +286,9 @@ namespace tinder4apartment.Repo
             }
         }
 
-        public async Task<ProviderModel> GetOneProvider(int id)
+        public async Task<Firm> GetOneProvider(int id)
         {
-            var provider =  await _db.ProviderModels.FirstOrDefaultAsync(m=> m.Id == id);
+            var provider =  await _db.Firms.FirstOrDefaultAsync(m=> m.Id == id);
 
             provider.Password = null;
             provider.PasswordHash = null;
@@ -298,31 +301,25 @@ namespace tinder4apartment.Repo
         {
              if (property != null)
             {
-                 property.IsActive = true;
+                property.IsActive = true;
+                IFormFile[] files = new IFormFile[]{property.imageFile1, property.imageFile2, property.imageFile3};
+                string[] fileLinks = new string[]{property.ImageLink1, property.ImageLink2, property.ImageLink3};
+
+                for (int i = 0; i < files.Length; i++)
+                {
+                    if(files[i] == null)
+                    {
+                        fileLinks[i] = "#";
+                    }
+                    else{
+                        fileLinks[i] = GetFileUploadBlobReturnsLink(files[i]);
+                    }
+                }
+
+                property.ImageLink1 = fileLinks[0];
+                property.ImageLink2 = fileLinks[1];
+                property.ImageLink3 = fileLinks[2];
                 
-                var image = property.imageFile1;
-
-                var imageFileName = image.FileName;
-                string imageMimeType = image.ContentType;
-                byte[] imageData = GetBytes(property.imageFile1);
-
-                property.ImageLink1 = _blob.UploadFileToBlob(imageFileName, imageData, imageMimeType);
-
-                var image1 = property.imageFile2;
-
-                var imageFileName2 = image1.FileName;
-                string imageMimeType2 = image1.ContentType;
-                byte[] imageData2 = GetBytes(image1);
-
-                property.ImageLink2 = _blob.UploadFileToBlob(imageFileName2, imageData2, imageMimeType2);
-
-                var image2 = property.imageFile3;
-
-                var imageFileName3 = image2.FileName;
-                string imageMimeType3 = image2.ContentType;
-                byte[] imageData3 = GetBytes(image2);
-
-                property.ImageLink3 = _blob.UploadFileToBlob(imageFileName3, imageData3, imageMimeType3);
 
                 
                 _db.LandProperties.Add(property);
@@ -332,6 +329,15 @@ namespace tinder4apartment.Repo
             }
 
             return null;
+        }
+
+        public string GetFileUploadBlobReturnsLink(IFormFile file)
+        {
+            var fileName = file.FileName;
+            string mime = file.ContentType;
+            byte[] data = GetBytes(file);
+
+            return _blob.UploadFileToBlob(fileName, data, mime);
         }
 
         public async Task<List<LandProperty>> GetAllLandProperties()
@@ -346,7 +352,13 @@ namespace tinder4apartment.Repo
 
         public async Task<LandProperty> GetOneLandProperty(int id)
         {
-            return await _db.LandProperties.FirstOrDefaultAsync(m => m.Id == id);
+            var property =  await _db.LandProperties.Include(m => m.Firm).FirstOrDefaultAsync(m => m.Id == id);
+            property.Firm.LandProperties = null;
+            property.Firm.RentalProperties = null;
+            property.Firm.CommercialProperty = null;
+            property.Firm.OnSaleProperties = null;
+
+            return property;
         }
 
         public async Task<List<LandProperty>> GetAllLandPropertiesByFirm(int id)
@@ -356,7 +368,7 @@ namespace tinder4apartment.Repo
 
         public async Task<List<LandProperty>> GetAllActiveLandPropertiesByFirm(int id)
         {
-            return await _db.LandProperties.Where(m=> m.IsActive == true && m.ProviderModelId == id).ToListAsync(); 
+            return await _db.LandProperties.Where(m=> m.IsActive == true && m.FirmId == id).ToListAsync(); 
         }
 
         public async Task<RentalProperty> EditRentalProperty(int id, RentalProperty property)
@@ -425,9 +437,13 @@ namespace tinder4apartment.Repo
         }
 
        
-        public async void AddSearchQueryToLog(string searchQuery, string searchLocation, int queriedFirmId, PropertyType propertyType, int resultInFirm, int resultInOtherFirms)
+        public void AddSearchQueryToLog(string searchQuery, string searchLocation, int queriedFirmId, PropertyType propertyType, int resultInFirm, int resultInOtherFirms)
         {
-             var firm = await _db.ProviderModels.FirstOrDefaultAsync(m => m.Id == queriedFirmId);
+             var firm = _db.Firms.FirstOrDefault(m => m.Id == queriedFirmId);
+             if(firm == null)
+             {
+                 firm = new Firm();
+             }
             var searchLog = new SearchQueryLog{
                 SearchQuery = searchQuery,
                 SearchLocation = searchLocation,
@@ -450,10 +466,15 @@ namespace tinder4apartment.Repo
         public async void UpdateSearchQueryToLog(string searchQuery, string searchLocation, 
             PropertyType propertyType, int resultInFirm, int resultInOtherFirms)
         {
-            var searchResult = await _db.SearchQueryLogs.AsNoTracking().FirstOrDefaultAsync(m => m.SearchQuery == searchQuery);
-            searchResult.CountResultFoundInOtherFirms = resultInOtherFirms;
-            _db.SearchQueryLogs.Update(searchResult);
-            await _db.SaveChangesAsync();
+            var searchResult =  _db.SearchQueryLogs.AsNoTracking().FirstOrDefault(m => m.SearchQuery == searchQuery && m.PropertyType == propertyType);
+            if(searchResult != null)
+            {
+                searchResult.CountResultFoundInOtherFirms = resultInOtherFirms;
+                _db.SearchQueryLogs.Update(searchResult);
+                await _db.SaveChangesAsync();
+            }else{
+                AddSearchQueryToLog(searchQuery, searchLocation, 0, propertyType, resultInFirm, resultInOtherFirms);
+            }
         }
     }
 }

@@ -15520,7 +15520,7 @@
           },
           {
             "Kind": "ITagHelper",
-            "Name": "render-purpose",
+            "Name": "render-mode",
             "TypeName": "Microsoft.AspNetCore.Mvc.Rendering.RenderMode",
             "IsEnum": true,
             "IndexerNamePrefix": null,

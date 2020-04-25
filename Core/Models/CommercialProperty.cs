@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace tinder4apartment.Models
 {
     public class CommercialProperty : BasicProperty
@@ -8,8 +10,9 @@ namespace tinder4apartment.Models
 
         public Purpose Purpose {get; set;}
         public string Title {get; set;}
-        public ProviderModel ProviderModel { get; set; }
-        public int ProviderModelId { get; set; }
+        public Firm Firm { get; set; }
+         
+        public int FirmId { get; set; }
     }
 
     public enum Purpose

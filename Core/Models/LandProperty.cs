@@ -25,7 +25,9 @@ namespace server.Core.Models
           public string ImageLink1 { get; set; }
         public string ImageLink2 { get; set; }
         public string ImageLink3 { get; set; }
-        public ProviderModel ProviderModel {get; set;}
-        public int ProviderModelId { get; set; }
+        public Firm Firm { get; set; }
+        public int FirmId { get; set; }
+
+        public string Description{get; set;}
     }
 }

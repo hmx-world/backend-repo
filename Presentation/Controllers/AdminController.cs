@@ -10,11 +10,11 @@ namespace tinder4apartment.Controllers
     [Route("api/[controller]")]
     public class AdminController : ControllerBase
     {
-        private readonly IProviderRepo _providerRepo;
+        private readonly IFirmRepo _firmRepo;
         private readonly IPropertyManager _manager;
-        public AdminController(IProviderRepo providerRepo, IPropertyManager manager)
+        public AdminController(IFirmRepo firmRepo, IPropertyManager manager)
         {
-            _providerRepo = providerRepo;
+            _firmRepo = firmRepo;
             _manager = manager;
         }
 
@@ -41,7 +41,7 @@ namespace tinder4apartment.Controllers
         [HttpGet("providers/all")]
         public async Task<IActionResult> GetAllProviders()
         {
-            return Ok (await _providerRepo.GetProviders());
+            return Ok (await _firmRepo.GetFirms());
         }
 
 

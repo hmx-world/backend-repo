@@ -246,7 +246,9 @@ namespace tinder4apartment.Repo
                     State = item.State,
                     Name = item.Name,
                     Price = item.Price,
-                    IsActive = item.IsActive
+                    IsActive = item.IsActive,
+                    AreaSize = item.AreaSize,
+                    
                 };
                 
                 propertyIndex.Rank = areaRank + pricePoint;

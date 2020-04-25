@@ -53,9 +53,65 @@ namespace tinder4apartment.Migrations
                     b.Property<int>("PropertyId")
                         .HasColumnType("int");
 
+                    b.Property<int>("PropertyType")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("GoForCheckOrRedirects");
+                });
+
+            modelBuilder.Entity("server.Core.Models.LandProperty", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("AreaSize")
+                        .HasColumnType("float");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FirmId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageLink1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageLink2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageLink3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Town")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FirmId");
+
+                    b.ToTable("LandProperties");
                 });
 
             modelBuilder.Entity("server.Core.Models.SearchQueryLog", b =>
@@ -74,6 +130,9 @@ namespace tinder4apartment.Migrations
                     b.Property<DateTime>("DateQueried")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("PropertyType")
+                        .HasColumnType("int");
+
                     b.Property<string>("QueriedFirm")
                         .HasColumnType("nvarchar(max)");
 
@@ -82,9 +141,6 @@ namespace tinder4apartment.Migrations
 
                     b.Property<string>("SearchQuery")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("purpose")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -111,6 +167,9 @@ namespace tinder4apartment.Migrations
 
                     b.Property<string>("Extras")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FirmId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ImageLink1")
                         .HasColumnType("nvarchar(max)");
@@ -143,9 +202,6 @@ namespace tinder4apartment.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("ProviderModelId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ProviderName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -166,89 +222,12 @@ namespace tinder4apartment.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProviderModelId");
+                    b.HasIndex("FirmId");
 
                     b.ToTable("CommercialProperties");
                 });
 
-            modelBuilder.Entity("tinder4apartment.Models.OnSaleProperty", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("BuildingType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Extras")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageLink1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageLink2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageLink3")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageLink4")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LandArea")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NeighbourhoodSecurity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumberOfBedrooms")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<int>("ProviderModelId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProviderName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SiteDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Town")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProviderModelId");
-
-                    b.ToTable("OnSaleProperties");
-                });
-
-            modelBuilder.Entity("tinder4apartment.Models.ProviderModel", b =>
+            modelBuilder.Entity("tinder4apartment.Models.Firm", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -287,7 +266,84 @@ namespace tinder4apartment.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProviderModels");
+                    b.ToTable("Firms");
+                });
+
+            modelBuilder.Entity("tinder4apartment.Models.OnSaleProperty", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BuildingType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Extras")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FirmId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageLink1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageLink2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageLink3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageLink4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LandArea")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NeighbourhoodSecurity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfBedrooms")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<string>("ProviderName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SiteDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Town")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FirmId");
+
+                    b.ToTable("OnSaleProperties");
                 });
 
             modelBuilder.Entity("tinder4apartment.Models.RentalProperty", b =>
@@ -307,6 +363,9 @@ namespace tinder4apartment.Migrations
 
                     b.Property<string>("Extras")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FirmId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ImageLink1")
                         .HasColumnType("nvarchar(max)");
@@ -339,9 +398,6 @@ namespace tinder4apartment.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("ProviderModelId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ProviderName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -365,7 +421,7 @@ namespace tinder4apartment.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProviderModelId");
+                    b.HasIndex("FirmId");
 
                     b.ToTable("RentalProperties");
                 });
@@ -397,29 +453,38 @@ namespace tinder4apartment.Migrations
                     b.ToTable("SubModels");
                 });
 
+            modelBuilder.Entity("server.Core.Models.LandProperty", b =>
+                {
+                    b.HasOne("tinder4apartment.Models.Firm", "Firm")
+                        .WithMany("LandProperties")
+                        .HasForeignKey("FirmId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("tinder4apartment.Models.CommercialProperty", b =>
                 {
-                    b.HasOne("tinder4apartment.Models.ProviderModel", "ProviderModel")
+                    b.HasOne("tinder4apartment.Models.Firm", "Firm")
                         .WithMany("CommercialProperty")
-                        .HasForeignKey("ProviderModelId")
+                        .HasForeignKey("FirmId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("tinder4apartment.Models.OnSaleProperty", b =>
                 {
-                    b.HasOne("tinder4apartment.Models.ProviderModel", "ProviderModel")
+                    b.HasOne("tinder4apartment.Models.Firm", "Firm")
                         .WithMany("OnSaleProperties")
-                        .HasForeignKey("ProviderModelId")
+                        .HasForeignKey("FirmId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("tinder4apartment.Models.RentalProperty", b =>
                 {
-                    b.HasOne("tinder4apartment.Models.ProviderModel", "ProviderModel")
+                    b.HasOne("tinder4apartment.Models.Firm", "Firm")
                         .WithMany("RentalProperties")
-                        .HasForeignKey("ProviderModelId")
+                        .HasForeignKey("FirmId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

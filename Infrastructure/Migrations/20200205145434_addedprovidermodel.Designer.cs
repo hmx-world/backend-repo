@@ -163,7 +163,7 @@ namespace tinder4apartment.Migrations
                     b.ToTable("OnSaleProperties");
                 });
 
-            modelBuilder.Entity("tinder4apartment.Models.ProviderModel", b =>
+            modelBuilder.Entity("tinder4apartment.Models.Firm", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -272,21 +272,21 @@ namespace tinder4apartment.Migrations
 
             modelBuilder.Entity("tinder4apartment.Models.IndustrialProperty", b =>
                 {
-                    b.HasOne("tinder4apartment.Models.ProviderModel", null)
+                    b.HasOne("tinder4apartment.Models.Firm", null)
                         .WithMany("MyProperty")
                         .HasForeignKey("ProviderModelId");
                 });
 
             modelBuilder.Entity("tinder4apartment.Models.OnSaleProperty", b =>
                 {
-                    b.HasOne("tinder4apartment.Models.ProviderModel", null)
+                    b.HasOne("tinder4apartment.Models.Firm", null)
                         .WithMany("OnSaleProperties")
                         .HasForeignKey("ProviderModelId");
                 });
 
             modelBuilder.Entity("tinder4apartment.Models.RentalProperty", b =>
                 {
-                    b.HasOne("tinder4apartment.Models.ProviderModel", null)
+                    b.HasOne("tinder4apartment.Models.Firm", null)
                         .WithMany("RentalProperties")
                         .HasForeignKey("ProviderModelId");
                 });
