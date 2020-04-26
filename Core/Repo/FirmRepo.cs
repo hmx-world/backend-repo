@@ -45,16 +45,23 @@ namespace tinder4apartment.Repo
             firmDetails.PasswordSalt = passwordSalt;
             firmDetails.LoginId = sb.ToString();
   
-            
-            var imageFileName = firmDetails.imageFile1.FileName;
-            string imageMimeType =firmDetails.imageFile1.ContentType;
-            byte[] imageData = PropertyManager.GetBytes(firmDetails.imageFile1);
+            if(firmDetails.imageFile1 == null)
+            {
+                firmDetails.ImageUri = "#";
+            }
+            else{
+                  var imageFileName = firmDetails.imageFile1.FileName;
+                string imageMimeType =firmDetails.imageFile1.ContentType;
+                byte[] imageData = PropertyManager.GetBytes(firmDetails.imageFile1);
 
-           // providerDetails.ImageUri = _blob.UploadFileToBlob(imageFileName, imageData, imageMimeType);
+                firmDetails.ImageUri = _blob.UploadFileToBlob(imageFileName, imageData, imageMimeType);
+
+            }
+          
             
             List<Firm> firmsCreated = ListofCreatedFirms(firmDetails);
-
-            _db.Firms.AddRange(firmsCreated);
+            _db.AddRange(firmsCreated);            
+           
             await _db.SaveChangesAsync();
 
 
@@ -130,6 +137,7 @@ namespace tinder4apartment.Repo
 
         public List<Firm> ListofCreatedFirms(Firm firmdetails)
         {
+           
             List<Firm> firms = new List<Firm>();
             switch (firmdetails.Plan)
             {
@@ -138,22 +146,16 @@ namespace tinder4apartment.Repo
                     return firms;
                 case Plan.Pro:
                     firms.Add(firmdetails);
-                    firmdetails.LoginId = firmdetails.LoginId+"-n";
-                    firms.Add(firmdetails);
+                    firms.Add(CreateFrimVariant(firmdetails, "-n"));
                     return firms;
                 case Plan.Premium:
                     firms.Add(firmdetails);
-                    firmdetails.LoginId = firmdetails.LoginId+"-n";
-                    firms.Add(firmdetails);
-                    firmdetails.LoginId = firmdetails.LoginId+"-x";
-                    firms.Add(firmdetails);
-                    firmdetails.LoginId = firmdetails.LoginId+"-a";
-                    firms.Add(firmdetails);
-                    firmdetails.LoginId = firmdetails.LoginId+"-z";
-                    firms.Add(firmdetails);
+                    firms.Add(CreateFrimVariant(firmdetails, "-ne"));
+                    firms.Add(CreateFrimVariant(firmdetails, "-re"));
+                    firms.Add(CreateFrimVariant(firmdetails, "-ze"));
+                    firms.Add(CreateFrimVariant(firmdetails, "-we"));
                     return firms;
                 default:
-                    firms.Add(firmdetails);
                     return firms;
             }
         }
@@ -165,7 +167,7 @@ namespace tinder4apartment.Repo
             {
                 login.Add(new FirmLoginDto{
                     LoginId = item.LoginId,
-                    Password = item.LoginId,
+                    Password = item.Password,
                     Id = item.Id
                 });
             }
@@ -173,6 +175,24 @@ namespace tinder4apartment.Repo
             return login;
         }
 
+        public Firm CreateFrimVariant(Firm firm, string variant)
+        {
+           var newUser = new Firm{
+               Name = firm.Name,
+               Location = firm.Location,
+               LoginId = firm.LoginId + variant,
+               ImageUri = firm.ImageUri,
+               Description = firm.Description,
+               Email  = firm.Email,
+               Password = firm.Password,
+               PasswordHash = firm.PasswordHash,
+               PasswordSalt = firm.PasswordSalt,
+               Plan = firm.Plan,
+               PhoneNumber = firm.PhoneNumber
+           };
+
+           return newUser;
+        }
          public string GenerateToken(Firm userData)
         {
             //generate token

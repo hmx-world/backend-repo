@@ -64,7 +64,7 @@ namespace tinder4apartment
             services.AddScoped<IMatchRepo, MatchRepo>();
             services.AddScoped<IFirmRepo, FirmRepo>();
             services.AddScoped<IBlobRepo, BlobRepo>();
-            //  services.AddScoped<ISubscriptionRepo, SubscriptionRepo>();
+            services.AddScoped<ISubscriptionRepo, SubscriptionRepo>();
             
 
             //services.AddSwaggerDocument(); 
