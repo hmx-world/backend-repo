@@ -430,10 +430,10 @@ namespace tinder4apartment.Repo
             return landProperty;
         }
 
-        public void AddProviderAction(GoForCheckOrRedirect checkOrRedirect)
+        public async void AddProviderAction(GoForCheckOrRedirect checkOrRedirect)
         {
             _db.GoForCheckOrRedirects.Add(checkOrRedirect);
-            _db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
         }
 
        

@@ -8,6 +8,19 @@ namespace server.Core.Models
     }
 
     public enum PropertyType{
-        ResidentialForSale, ResidentialForRent, CommercialForSale, CommercialForRent, LandProperty
+        OnSale, Rental, Commercial, LandProperty
+    }
+
+
+    public class EmergencyPropertyDTO : EmergencyProperty
+    {
+        public string Name { get; set; }
+        public double Price { get; set; }
+        public string PropertyLocation {get; set;}
+
+        public new string PropertyType {get; set;}
+
+        public string FirmName {get; set;}
+        public string FirmLocation { get; set; }
     }
 }

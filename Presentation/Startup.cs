@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using server.Core.Repo;
 
 namespace tinder4apartment
 {
@@ -65,6 +66,7 @@ namespace tinder4apartment
             services.AddScoped<IFirmRepo, FirmRepo>();
             services.AddScoped<IBlobRepo, BlobRepo>();
             services.AddScoped<ISubscriptionRepo, SubscriptionRepo>();
+            services.AddScoped<IAdminRepo, AdminRepo>();
             
 
             //services.AddSwaggerDocument(); 

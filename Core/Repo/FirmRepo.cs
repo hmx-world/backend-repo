@@ -131,7 +131,7 @@ namespace tinder4apartment.Repo
         public void AddEmergencyProperty(EmergencyProperty emergencyProperty)
         {
             _db.EmergencyProperties.Add(emergencyProperty);
-            _db.SaveChangesAsync();
+            _db.SaveChanges();
         }
 
 

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hp\\dotnet repos\\work projects\\hmx\\hmxworld-app\\server\\tinder4apartment.csproj": {}
+    "c:\\Users\\hp\\dotnet repos\\work projects\\hmx\\hmxworld-app\\server\\tinder4apartment.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hp\\dotnet repos\\work projects\\hmx\\hmxworld-app\\server\\tinder4apartment.csproj": {
+    "c:\\Users\\hp\\dotnet repos\\work projects\\hmx\\hmxworld-app\\server\\tinder4apartment.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\dotnet repos\\work projects\\hmx\\hmxworld-app\\server\\tinder4apartment.csproj",
+        "projectUniqueName": "c:\\Users\\hp\\dotnet repos\\work projects\\hmx\\hmxworld-app\\server\\tinder4apartment.csproj",
         "projectName": "tinder4apartment",
-        "projectPath": "C:\\Users\\hp\\dotnet repos\\work projects\\hmx\\hmxworld-app\\server\\tinder4apartment.csproj",
+        "projectPath": "c:\\Users\\hp\\dotnet repos\\work projects\\hmx\\hmxworld-app\\server\\tinder4apartment.csproj",
         "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\dotnet repos\\work projects\\hmx\\hmxworld-app\\server\\obj\\",
+        "outputPath": "c:\\Users\\hp\\dotnet repos\\work projects\\hmx\\hmxworld-app\\server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"

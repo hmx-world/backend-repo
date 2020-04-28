@@ -38,4 +38,18 @@ namespace tinder4apartment.Models
 
         public Plan Plan {get; set;}
     }
+
+    public class FirmDetailsDTO
+    {
+        public int Id { get; set; }
+        public string LoginID { get; set; }
+        public string FirmName { get; set; }
+        public string CurrentPlan { get; set; }
+        public int RentalProperties { get; set; }
+        public int LandProperties { get; set; }
+        public int CommercialProperties { get; set; }
+        public string Email { get; set; }
+        public int OnSaleProperties { get; set; }
+        public string PhoneNumber { get; set; }
+    }
 }

@@ -30,7 +30,7 @@ namespace server.Presentation.Helpers
 
             string stringQuery = $"Number of occupants: {query.NumberofAdult + query.NumberofChildren}. max price: {query.maxPrice}, min price: {query.minPrice}";
             string location = $"{query.City}, {query.State}";
-            _manager.AddSearchQueryToLog(stringQuery, location,firmId, PropertyType.ResidentialForRent, result.Count, 0);
+            _manager.AddSearchQueryToLog(stringQuery, location,firmId, PropertyType.Rental, result.Count, 0);
 
             return result.OrderByDescending(m => m.Rank);
         }
@@ -45,7 +45,7 @@ namespace server.Presentation.Helpers
 
             string stringQuery = $"Number of occupants: {query.NumberofAdult + query.NumberofChildren}. max price: {query.maxPrice}, min price: {query.minPrice}";
             string location = $"{query.City}, {query.State}";
-            _manager.AddSearchQueryToLog(stringQuery, location,firmId, PropertyType.ResidentialForSale, result.Count, 0);
+            _manager.AddSearchQueryToLog(stringQuery, location,firmId, PropertyType.OnSale, result.Count, 0);
 
             return result.OrderByDescending(m => m.Rank);
         }
@@ -60,7 +60,7 @@ namespace server.Presentation.Helpers
 
             string stringQuery = $"Number of occupants: {query.NumberofAdult + query.NumberofChildren}. max price: {query.maxPrice}, min price: {query.minPrice}";
             string location = $"{query.City}, {query.State}";
-            _manager.UpdateSearchQueryToLog(stringQuery, location, PropertyType.ResidentialForRent,0, result.Count);
+            _manager.UpdateSearchQueryToLog(stringQuery, location, PropertyType.Rental,0, result.Count);
 
             return result.OrderByDescending(m => m.Rank);
         }
@@ -76,7 +76,7 @@ namespace server.Presentation.Helpers
 
             string stringQuery = $"Number of occupants: {query.NumberofAdult + query.NumberofChildren}. max price: {query.maxPrice}, min price: {query.minPrice}";
             string location = $"{query.City}, {query.State}";
-            _manager.UpdateSearchQueryToLog(stringQuery, location, PropertyType.ResidentialForSale,0, result.Count);
+            _manager.UpdateSearchQueryToLog(stringQuery, location, PropertyType.OnSale,0, result.Count);
 
             return result.OrderByDescending(m => m.Rank);
         }
@@ -92,7 +92,7 @@ namespace server.Presentation.Helpers
 
             string stringQuery = $"Number of rooms: {query.NumberOfRooms}. max price: {query.maxPrice}, min price: {query.minPrice}";
             string location = $"{query.City}, {query.State}";
-            _manager.AddSearchQueryToLog(stringQuery, location,firmId, PropertyType.CommercialForRent, result.Count, 0);
+            _manager.AddSearchQueryToLog(stringQuery, location,firmId, PropertyType.Rental, result.Count, 0);
 
             return result.OrderByDescending(m => m.Rank);
         }
@@ -107,7 +107,7 @@ namespace server.Presentation.Helpers
 
              string stringQuery = $"Number of rooms: {query.NumberOfRooms}. max price: {query.maxPrice}, min price: {query.minPrice}";
             string location = $"{query.City}, {query.State}";
-            _manager.AddSearchQueryToLog(stringQuery, location,firmId, PropertyType.CommercialForRent, result.Count, 0);
+            _manager.AddSearchQueryToLog(stringQuery, location,firmId, PropertyType.Commercial, result.Count, 0);
 
             return result.OrderByDescending(m => m.Rank);
         }
@@ -123,7 +123,7 @@ namespace server.Presentation.Helpers
 
              string stringQuery = $"Number of rooms: {query.NumberOfRooms}. max price: {query.maxPrice}, min price: {query.minPrice}";
             string location = $"{query.City}, {query.State}";
-            _manager.UpdateSearchQueryToLog(stringQuery, location, PropertyType.CommercialForRent,  0, result.Count);
+            _manager.UpdateSearchQueryToLog(stringQuery, location, PropertyType.Commercial,  0, result.Count);
 
             return result.OrderByDescending(m => m.Rank);
         }
@@ -138,7 +138,7 @@ namespace server.Presentation.Helpers
 
             string stringQuery = $"Number of rooms: {query.NumberOfRooms}. max price: {query.maxPrice}, min price: {query.minPrice}";
             string location = $"{query.City}, {query.State}";
-            _manager.UpdateSearchQueryToLog(stringQuery, location, PropertyType.CommercialForSale, 0, result.Count);
+            _manager.UpdateSearchQueryToLog(stringQuery, location, PropertyType.Commercial, 0, result.Count);
 
             return result.OrderByDescending(m => m.Rank);
         }

@@ -348,7 +348,7 @@ namespace tinder4apartment.Controllers
        
 
 
-        [HttpPost("provider-action")]
+        [HttpPost("firm/action")]
         public IActionResult GoForPropertyCheck([FromBody]GoForCheckOrRedirect providerAction)
         {
             if (!ModelState.IsValid)
