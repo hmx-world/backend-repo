@@ -15,7 +15,7 @@
         "Kind": "Components.Component",
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Documentation": "\n             <summary>\n             Combines the behaviors of <see cref=\"T:Microsoft.AspNetCore.Components.Authorization.AuthorizeView\" /> and <see cref=\"T:Microsoft.AspNetCore.Components.RouteView\" />,\n             so that it displays the page matching the specified route but only if the user\n             is authorized to see it.\n            \n             Additionally, this component supplies a cascading parameter of type <see cref=\"T:System.Threading.Tasks.Task`1\" />,\n             which makes the user's current authentication state available to descendants.\n             </summary>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -65,7 +65,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Gets or sets the type of a layout to be used if the page does not\n            declare any layout. If specified, the type must implement <see cref=\"T:Microsoft.AspNetCore.Components.IComponent\" />\n            and accept a parameter named <see cref=\"P:Microsoft.AspNetCore.Components.LayoutComponentBase.Body\" />.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "DefaultLayout"
@@ -79,7 +79,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Gets or sets the route data. This determines the page that will be\n            displayed and the parameter values that will be supplied to the page.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "RouteData"
@@ -113,7 +113,7 @@
         "Kind": "Components.Component",
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Documentation": "\n             <summary>\n             Combines the behaviors of <see cref=\"T:Microsoft.AspNetCore.Components.Authorization.AuthorizeView\" /> and <see cref=\"T:Microsoft.AspNetCore.Components.RouteView\" />,\n             so that it displays the page matching the specified route but only if the user\n             is authorized to see it.\n            \n             Additionally, this component supplies a cascading parameter of type <see cref=\"T:System.Threading.Tasks.Task`1\" />,\n             which makes the user's current authentication state available to descendants.\n             </summary>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -163,7 +163,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Gets or sets the type of a layout to be used if the page does not\n            declare any layout. If specified, the type must implement <see cref=\"T:Microsoft.AspNetCore.Components.IComponent\" />\n            and accept a parameter named <see cref=\"P:Microsoft.AspNetCore.Components.LayoutComponentBase.Body\" />.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "DefaultLayout"
@@ -177,7 +177,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Gets or sets the route data. This determines the page that will be\n            displayed and the parameter values that will be supplied to the page.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "RouteData"
@@ -1473,7 +1473,7 @@
         "Kind": "Components.Component",
         "Name": "Microsoft.AspNetCore.Components.RouteView",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Documentation": "\n            <summary>\n            Displays the specified page component, rendering it inside its layout\n            and any further nested layouts.\n            </summary>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -1493,7 +1493,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Gets or sets the type of a layout to be used if the page does not\n            declare any layout. If specified, the type must implement <see cref=\"T:Microsoft.AspNetCore.Components.IComponent\" />\n            and accept a parameter named <see cref=\"P:Microsoft.AspNetCore.Components.LayoutComponentBase.Body\" />.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "DefaultLayout"
@@ -1507,7 +1507,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Gets or sets the route data. This determines the page that will be\n            displayed and the parameter values that will be supplied to the page.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "RouteData"
@@ -1526,7 +1526,7 @@
         "Kind": "Components.Component",
         "Name": "Microsoft.AspNetCore.Components.RouteView",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Documentation": "\n            <summary>\n            Displays the specified page component, rendering it inside its layout\n            and any further nested layouts.\n            </summary>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -1546,7 +1546,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Gets or sets the type of a layout to be used if the page does not\n            declare any layout. If specified, the type must implement <see cref=\"T:Microsoft.AspNetCore.Components.IComponent\" />\n            and accept a parameter named <see cref=\"P:Microsoft.AspNetCore.Components.LayoutComponentBase.Body\" />.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "DefaultLayout"
@@ -1560,7 +1560,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Gets or sets the route data. This determines the page that will be\n            displayed and the parameter values that will be supplied to the page.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "RouteData"
@@ -1580,7 +1580,7 @@
         "Kind": "Components.Component",
         "Name": "Microsoft.AspNetCore.Components.Routing.Router",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Documentation": "\n            <summary>\n            A component that supplies route data corresponding to the current navigation state.\n            </summary>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -1678,7 +1678,7 @@
         "Kind": "Components.Component",
         "Name": "Microsoft.AspNetCore.Components.Routing.Router",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Documentation": "\n            <summary>\n            A component that supplies route data corresponding to the current navigation state.\n            </summary>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -3239,7 +3239,7 @@
         "Kind": "Components.Component",
         "Name": "Microsoft.AspNetCore.Components.Forms.InputText",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            An input component for editing <see cref=\"T:System.String\" /> values.\n            </summary>\n        ",
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -3321,7 +3321,7 @@
         "Kind": "Components.Component",
         "Name": "Microsoft.AspNetCore.Components.Forms.InputText",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            An input component for editing <see cref=\"T:System.String\" /> values.\n            </summary>\n        ",
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -3404,7 +3404,7 @@
         "Kind": "Components.Component",
         "Name": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            A multiline input component for editing <see cref=\"T:System.String\" /> values.\n            </summary>\n        ",
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -3486,7 +3486,7 @@
         "Kind": "Components.Component",
         "Name": "Microsoft.AspNetCore.Components.Forms.InputTextArea",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            A multiline input component for editing <see cref=\"T:System.String\" /> values.\n            </summary>\n        ",
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -3569,7 +3569,7 @@
         "Kind": "Components.Component",
         "Name": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            Displays a list of validation messages for a specified field within a cascaded <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\n            </summary>\n        ",
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -3604,7 +3604,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            Gets or sets a collection of additional attributes that will be applied to the created <c>div</c> element.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "AdditionalAttributes"
@@ -3618,7 +3618,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            Specifies the field for which validation messages should be displayed.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "For",
@@ -3639,7 +3639,7 @@
         "Kind": "Components.Component",
         "Name": "Microsoft.AspNetCore.Components.Forms.ValidationMessage<TValue>",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            Displays a list of validation messages for a specified field within a cascaded <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\n            </summary>\n        ",
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -3674,7 +3674,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            Gets or sets a collection of additional attributes that will be applied to the created <c>div</c> element.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "AdditionalAttributes"
@@ -3688,7 +3688,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            Specifies the field for which validation messages should be displayed.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "For",
@@ -3710,7 +3710,7 @@
         "Kind": "Components.Component",
         "Name": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            Displays a list of validation messages from a cascaded <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\n            </summary>\n        ",
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -3730,7 +3730,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            Gets or sets a collection of additional attributes that will be applied to the created <c>ul</c> element.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "AdditionalAttributes"
@@ -3744,7 +3744,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            Gets or sets the model to produce the list of validation messages for.\n            When specified, this lists all errors that are associated with the model instance.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Model"
@@ -3763,7 +3763,7 @@
         "Kind": "Components.Component",
         "Name": "Microsoft.AspNetCore.Components.Forms.ValidationSummary",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            Displays a list of validation messages from a cascaded <see cref=\"T:Microsoft.AspNetCore.Components.Forms.EditContext\" />.\n            </summary>\n        ",
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -3783,7 +3783,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            Gets or sets a collection of additional attributes that will be applied to the created <c>ul</c> element.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "AdditionalAttributes"
@@ -3797,7 +3797,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            Gets or sets the model to produce the list of validation messages for.\n            When specified, this lists all errors that are associated with the model instance.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Model"
@@ -3817,7 +3817,7 @@
         "Kind": "Components.Component",
         "Name": "Microsoft.AspNetCore.Components.Routing.NavLink",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            A component that renders an anchor tag, automatically toggling its 'active'\n            class based on whether its 'href' matches the current URI.\n            </summary>\n        ",
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -3837,7 +3837,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            Gets or sets the CSS class name applied to the NavLink when the\n            current route matches the NavLink href.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "ActiveClass"
@@ -3851,7 +3851,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            Gets or sets a collection of additional attributes that will be added to the generated\n            <c>a</c> element.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "AdditionalAttributes"
@@ -3865,7 +3865,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            Gets or sets the child content of the component.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "ChildContent",
@@ -3880,7 +3880,7 @@
             "IsEnum": true,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            Gets or sets a value representing the URL matching behavior.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Match"
@@ -3899,7 +3899,7 @@
         "Kind": "Components.Component",
         "Name": "Microsoft.AspNetCore.Components.Routing.NavLink",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            A component that renders an anchor tag, automatically toggling its 'active'\n            class based on whether its 'href' matches the current URI.\n            </summary>\n        ",
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -3919,7 +3919,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            Gets or sets the CSS class name applied to the NavLink when the\n            current route matches the NavLink href.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "ActiveClass"
@@ -3933,7 +3933,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            Gets or sets a collection of additional attributes that will be added to the generated\n            <c>a</c> element.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "AdditionalAttributes"
@@ -3947,7 +3947,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            Gets or sets the child content of the component.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "ChildContent",
@@ -3962,7 +3962,7 @@
             "IsEnum": true,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            Gets or sets a value representing the URL matching behavior.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Match"
@@ -3982,7 +3982,7 @@
         "Kind": "Components.ChildContent",
         "Name": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            Gets or sets the child content of the component.\n            </summary>\n        ",
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -4007,7 +4007,7 @@
         "Kind": "Components.ChildContent",
         "Name": "Microsoft.AspNetCore.Components.Routing.NavLink.ChildContent",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            Gets or sets the child content of the component.\n            </summary>\n        ",
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -14460,7 +14460,7 @@
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper",
         "AssemblyName": "Microsoft.AspNetCore.Mvc.Razor",
-        "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting elements containing attributes with URL expected values.\n            </summary>\n            <remarks>Resolves URLs starting with '~/' (relative to the application's 'webroot' setting) that are not\n            targeted by other <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" />s. Runs prior to other <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" />s to ensure\n            application-relative URLs are resolved.</remarks>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "CaseSensitive": false,
         "TagMatchingRules": [
@@ -15130,7 +15130,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The name of the action method.\n            </summary>\n            <remarks>\n            Must be <c>null</c> if <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Route\" /> or <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page\" /> is non-<c>null</c>.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Action"

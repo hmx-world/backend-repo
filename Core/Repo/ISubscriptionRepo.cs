@@ -5,16 +5,12 @@ namespace tinder4apartment.Repo
 {
     public interface ISubscriptionRepo
     {
-        SubModel Populate(SubModel subModel);
+        void CreateSubscription(string loginId, Plan plan, string email);
+        bool HasItExpired(string loginId);
+        bool HasPropertyLimitReached(string loginId);
+        void UpgradePlan(string loginId, Plan newPlan);
+        void DowngradePlan(string loginId, Plan newPlan);
 
-        SubModel GetUserDataPlan(string loginId);
-
-
-        bool IsSubscriptionOver(string loginId , string id);
-
-        void UpdateUserData(int userSubId, int newPlan);
-
-        Task<bool> IsPropertyLimitOver(int id, SubModel sub);
-
+        void RenewSubscription(string loginId);
     }
 }

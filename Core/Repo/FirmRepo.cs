@@ -18,13 +18,15 @@ namespace tinder4apartment.Repo
     public class FirmRepo : IFirmRepo
     {
         private readonly PropertyDbContext _db;
+        private ISubscriptionRepo _subRepo;
         private readonly IBlobRepo _blob;
         private readonly IConfiguration _config;
-        public FirmRepo(PropertyDbContext db, IBlobRepo blob, IConfiguration config)
+        public FirmRepo(PropertyDbContext db, IBlobRepo blob, IConfiguration config, ISubscriptionRepo subRepo)
         {
             _db = db;
             _blob = blob;
             _config = config;
+            _subRepo = subRepo;
         }
         public async Task<List<FirmLoginDto>> CreateFirm(Firm firmDetails)
         {
@@ -71,6 +73,10 @@ namespace tinder4apartment.Repo
             //     Id = firmDetails.Id
             // };
 
+            foreach(var item in firmsCreated)
+            {
+                _subRepo.CreateSubscription(item.LoginId, item.Plan, item.Email);
+            }
 
            return LoginDetails(firmsCreated);
         }

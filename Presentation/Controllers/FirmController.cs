@@ -302,84 +302,111 @@ namespace tinder4apartment.Controllers
             return Ok(result);
         }
 
-        [HttpPost("subscription")]
-        public IActionResult CreateSubscription([FromBody]SubModel submodel)
+        [HttpGet("property/limit/reached/{loginId}")]
+        public IActionResult HasPropertyLimitReached(string loginId)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var result = _sub.Populate(submodel);
-
-            if (result != null)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest("cannot update model data");
-        }
-
-        [HttpGet("subscription/{loginid}")]
-        public IActionResult GetSubscriptionData([FromRoute]string loginId)
-        {
-            var result = _sub.GetUserDataPlan(loginId);
-
-            if(result != null)
-            {
-                return  Ok(result);
-            }    
-            return NotFound("user not found");
-        }
-
-
-        [HttpPost("subscription/propertylimit/{id}")]
-        public async Task<IActionResult> IsPropertyLimitReachedAsync([FromRoute]int id, [FromBody]SubModel sub){
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var result = await  _sub.IsPropertyLimitOver(id, sub);
-
-           return Ok(result);
-        }
-
-
-        [HttpPost("subscription/subscriptionover/{loginId}")]
-        public IActionResult IsSubcriptionOver([FromRoute]string loginId, [FromBody]DuedateClass duedate)
-        {
-            if(!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var result = _sub.IsSubscriptionOver(loginId, duedate.duedate);
-
+            var result = _sub.HasPropertyLimitReached(loginId);
             return Ok(result);
         }
 
-        [HttpPost("subscription/upgrade/{userSubId}/{newPlan}")]
-        public IActionResult UpgradeSubscription([FromRoute]int userSubId, [FromRoute]int newPlan)
+        [HttpGet("subscription/expired/{loginId}")]
+        public IActionResult HasSubscriptionExpired(string loginId)
         {
-            if(!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-             _sub.UpdateUserData(userSubId, newPlan);
-
-             return Ok();
+            var result = _sub.HasItExpired(loginId);
+            return Ok(result);
         }
 
+        [HttpGet("renew/subscription/{loginId}")]
+        public IActionResult RenewSubscription(string loginId)
+        {
+            _sub.RenewSubscription(loginId);
+            return Ok("subscription renewed");
+        }
+
+        [HttpGet("downgrade/plan/{loginId}/{newPlan}")]
+        public IActionResult DowngradePlan(string loginId, Plan newPlan)
+        {
+            _sub.DowngradePlan(loginId, newPlan);
+            return Ok("Subscription has been downgraded");
+        }
+
+        [HttpGet("upgrade/plan/{loginId}/{newPlan}")]
+        public IActionResult UpgradePlan(string loginId, Plan newPlan)
+        {
+            _sub.UpgradePlan(loginId, newPlan);
+            return Ok("Subscription has been upgraded");
+        }
+
+        // [HttpPost("subscription")]
+        // public IActionResult CreateSubscription([FromBody]SubModel submodel)
+        // {
+        //     if (!ModelState.IsValid)
+        //     {
+        //         return BadRequest(ModelState);
+        //     }
+
+        //     var result = _sub.Populate(submodel);
+
+        //     if (result != null)
+        //     {
+        //         return Ok(result);
+        //     }
+
+        //     return BadRequest("cannot update model data");
+        // }
+
+        // [HttpGet("subscription/{loginid}")]
+        // public IActionResult GetSubscriptionData([FromRoute]string loginId)
+        // {
+        //     var result = _sub.GetUserDataPlan(loginId);
+
+        //     if(result != null)
+        //     {
+        //         return  Ok(result);
+        //     }    
+        //     return NotFound("user not found");
+        // }
+
+
+        // [HttpPost("subscription/propertylimit/{id}")]
+        // public async Task<IActionResult> IsPropertyLimitReachedAsync([FromRoute]int id, [FromBody]SubModel sub){
+        //     if (!ModelState.IsValid)
+        //     {
+        //         return BadRequest(ModelState);
+        //     }
+
+        //     var result = await  _sub.IsPropertyLimitOver(id, sub);
+
+        //    return Ok(result);
+        // }
+
+
+        // [HttpPost("subscription/subscriptionover/{loginId}")]
+        // public IActionResult IsSubcriptionOver([FromRoute]string loginId, [FromBody]DuedateClass duedate)
+        // {
+        //     if(!ModelState.IsValid)
+        //     {
+        //         return BadRequest(ModelState);
+        //     }
+
+        //     var result = _sub.IsSubscriptionOver(loginId, duedate.duedate);
+
+        //     return Ok(result);
+        // }
+
+        // [HttpPost("subscription/upgrade/{userSubId}/{newPlan}")]
+        // public IActionResult UpgradeSubscription([FromRoute]int userSubId, [FromRoute]int newPlan)
+        // {
+        //     if(!ModelState.IsValid)
+        //     {
+        //         return BadRequest(ModelState);
+        //     }
+
+        //      _sub.UpdateUserData(userSubId, newPlan);
+
+        //      return Ok();
+        // }
+
     }
 
-    public class DuedateClass{
-        public string duedate;
-    }
-
-    public class Upgrade{
-        public int userSubId; 
-        public int newPlan;
-    }
 }

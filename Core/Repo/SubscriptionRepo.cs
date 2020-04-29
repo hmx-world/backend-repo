@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Paystack.Net.SDK.Customers;
 using tinder4apartment.Data;
@@ -12,128 +14,146 @@ namespace tinder4apartment.Repo
     public class SubscriptionRepo : ISubscriptionRepo
     {
         private readonly PropertyDbContext _db;
-        private readonly IConfiguration _config; 
-        string _paystackKey = string.Empty;
-
-        private readonly IFirmRepo _provider;
-        
-        public SubscriptionRepo(PropertyDbContext db, IConfiguration config, IFirmRepo provider)
+        public SubscriptionRepo(PropertyDbContext db)
         {
             _db = db;
-            _config = config;
-            _paystackKey = _config.GetConnectionString("Test_Skey");
-            _provider = provider;
-        }
-        public SubModel GetUserDataPlan(string loginId)
-        {
-            var result = _db.SubModels.FirstOrDefault(m=> m.LoginId == loginId);
-
-            return result; 
         }
 
-        public async Task<bool> IsPropertyLimitOver(int id, SubModel sub)
+        public async void CreateSubscription(string loginId, Plan plan, string email)
         {
-            Firm provider = await _provider.GetFirmDataComplete(id);
-
-            int industrial = provider.CommercialProperty.Count();
-            int rental = provider.RentalProperties.Count();
-            int onsale = provider.OnSaleProperties.Count();
-
-
-            if (sub.PropertyLimit == (industrial + rental + onsale))
+            switch (plan)
             {
-                return true;
-            }
-            else if ((industrial + rental + onsale) > sub.PropertyLimit){
-                return true;
-            }
-                 return false;
-        }
-
-
-        //here pass the subscription model then we go to 
-        //paystack to see if the due date is updated or not 
-        public bool IsSubscriptionOver(string loginId, string duedate)
-        {
-           var result = GetUserDataPlan(loginId);
-
-            String[] splits = duedate.Split('T');
-
-            string dueDatePayStack = splits[0];
-            string dueDateDB = result.DueDate;
-
-            if(dueDateDB.ToLower() == dueDatePayStack.ToLower()){
-                return true;
-            }
-            else if(dueDateDB.ToLower() != dueDatePayStack.ToLower()){
-                
-                //update the data on table 
-                var sub = _db.SubModels.First(m=> m.Id == result.Id);
-                if(sub.Plan == Plan.Business){
-                    sub.PropertyLimit = sub.PropertyLimit + 20;
-                }
-                else if(sub.Plan == Plan.Premium){
-                    sub.PropertyLimit = sub.PropertyLimit + 30;
-                }
-                sub.DueDate = dueDatePayStack;
-                _db.SaveChanges();
-                
-                return false;
-            }
-
-            return true;      
-        }
-
-        public SubModel Populate(SubModel subModel)
-        {
-            string dateNow =DateTime.Now.AddDays(30).ToString("yyyy-MM-dd");
-            subModel.DueDate = dateNow;
-            switch (subModel.Plan)
-            {
-                case Plan.Pro:
-                    subModel.PropertyLimit = 40;
-                    break;
                 case Plan.Business:
-                    subModel.PropertyLimit = 20;
+                    _db.SubModels.Add(new SubModel{
+                        LoginId = loginId,
+                        Plan = plan,
+                        DueDate = DateTime.Now.AddDays(30).ToString(),
+                        PropertyLimit = 20,
+                        Email = email
+                    });
+                    await _db.SaveChangesAsync();
                     break;
-                case Plan.Premium:
-                    subModel.PropertyLimit = 70;
+                case Plan.Pro:
+                    _db.SubModels.Add(new SubModel{
+                        LoginId = loginId,
+                        Plan = plan,
+                        DueDate = DateTime.Now.AddDays(30).ToString(),
+                        PropertyLimit = 40,
+                        Email = email
+                    });
+                    break;
+                 case Plan.Premium:
+                    _db.SubModels.Add(new SubModel{
+                        LoginId = loginId,
+                        Plan = plan,
+                        DueDate = DateTime.Now.AddDays(30).ToString(),
+                        PropertyLimit = int.MaxValue,
+                        Email = email
+                    });
                     break;
                 default:
-                    subModel.PropertyLimit = 20;
                     break;
             }
-
-           _db.Add(subModel);
-
-           _db.SaveChanges();
-
-           return subModel;
         }
 
-        public void UpdateUserData(int userSubId, int newPlan)
+        public void DowngradePlan(string loginId, Plan newPlan)
         {
-            var sub = _db.SubModels.FirstOrDefault(m => m.Id == userSubId);
-            sub.Plan =  (Plan)newPlan;
-            sub.DueDate = DateTime.Now.AddDays(30).ToString("yyyy-MM-dd");
-            sub.PropertyLimit = PropertyLimitBasedOnNewPlan(sub.PropertyLimit, newPlan);
+            var subscriptions = _db.SubModels.Where( m=> m.LoginId.Contains(loginId)).AsNoTracking().ToList();
+            foreach (var item in subscriptions)
+            {
+                item.Plan = newPlan;
+            }
 
+            _db.SubModels.UpdateRange(subscriptions);
             _db.SaveChanges();
-
         }
 
-        private int PropertyLimitBasedOnNewPlan(int currentPropertyLimit, int newPlan)
+        public bool HasItExpired(string loginId)
         {
-            if(newPlan == 1){
-                return currentPropertyLimit+40;
+            var subscriptionData = _db.SubModels.SingleOrDefault(m => m.LoginId == loginId);
+            if(subscriptionData.DueDate == DateTime.Now.ToString())
+            {
+                return true;
             }
-            else if(newPlan == 2){
-                return currentPropertyLimit + 70;
+            else{
+                return false;
             }
-
-            return 0;
         }
 
-       
+        public bool HasPropertyLimitReached(string loginId)
+        {
+            var firmData = (from firm in _db.Firms
+                            where firm.LoginId.Contains(loginId)
+                            select new FirmDetailsDTO{
+                                CurrentPlan = firm.Plan.ToString(),
+                                RentalProperties = firm.RentalProperties.Count,
+                                LandProperties = firm.LandProperties.Count,
+                                CommercialProperties = firm.CommercialProperty.Count,
+                                OnSaleProperties = firm.OnSaleProperties.Count,
+                            }).ToList();
+            
+            
+            
+            int limit = _db.SubModels
+                    .FirstOrDefault(m => m.LoginId.Contains(loginId)).PropertyLimit;
+            
+
+            switch (firmData[0].CurrentPlan)
+            {
+                case "Premium":
+                    return false;
+                case "Business":
+                    return ComparePropertyInDbandLimit(limit, firmData);
+                case "Pro":
+                    return ComparePropertyInDbandLimit(limit, firmData);
+                default:
+                    return ComparePropertyInDbandLimit(limit, firmData);
+            }
+            
+        }
+
+        private bool ComparePropertyInDbandLimit(int limit, List<FirmDetailsDTO> firmData)
+        {
+            int total = 0;
+            foreach (var item in firmData)
+            {
+                total += item.LandProperties;
+                total += item.CommercialProperties;
+                total += item.RentalProperties;
+                total += item.OnSaleProperties;
+            }
+
+            if(total < limit)
+            {
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+
+        public void RenewSubscription(string loginId)
+        {
+            var subscriptions = _db.SubModels.Where( m=> m.LoginId.Contains(loginId)).AsNoTracking().ToList();
+            foreach (var item in subscriptions)
+            {
+                item.DueDate = DateTime.Now.AddDays(30).ToString();
+            }
+
+            _db.SubModels.UpdateRange(subscriptions);
+            _db.SaveChanges();
+        }
+
+        public void UpgradePlan(string loginId, Plan newPlan)
+        {
+            var subscriptions = _db.SubModels.Where( m=> m.LoginId.Contains(loginId)).AsNoTracking().ToList();
+            foreach (var item in subscriptions)
+            {
+                item.Plan = newPlan;
+            }
+
+            _db.SubModels.UpdateRange(subscriptions);
+            _db.SaveChanges();
+        }
     }
 }
