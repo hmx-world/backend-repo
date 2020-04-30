@@ -25,6 +25,7 @@ namespace tinder4apartment
 {
     public class Startup
     {
+        private string ConnectDbString = "Server=tcp:startup-server.database.windows.net,1433;Initial Catalog=tinder4apartment_db;Persist Security Info=False;User ID=startupadmin;Password=Adegoke1234#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -39,7 +40,7 @@ namespace tinder4apartment
         {
          
            services.AddDbContext<PropertyDbContext>(options =>
-                 options.UseSqlServer("Server=(localdb)\\v11.0;Database=hmxworld-db;Trusted_Connection=True;MultipleActiveResultSets=true"));
+                 options.UseSqlServer(ConnectDbString));
 
             // services.AddAuthentication(options => {
             //     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
