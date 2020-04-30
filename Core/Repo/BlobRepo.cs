@@ -8,7 +8,7 @@ namespace tinder4apartment.Repo
 {
     public class BlobRepo : IBlobRepo
     {
-        private readonly IConfiguration _configuration;
+       // private readonly IConfiguration _configuration;
         string _accessKey = "DefaultEndpointsProtocol=https;AccountName=propertyb2bstorage;AccountKey=VGSs+KadJLDZTBt8uHfzPAYXeoew3CVdHUs9Ftons+7ds7kYt5s9xE9u9j+e8/HkcSZeuhtWU5hr6OasueH8RQ==;EndpointSuffix=core.windows.net";
    
         public void DeleteFileFromBlob(string fileUrl)

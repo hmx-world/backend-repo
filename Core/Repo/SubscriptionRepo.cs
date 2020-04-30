@@ -19,7 +19,7 @@ namespace tinder4apartment.Repo
             _db = db;
         }
 
-        public async void CreateSubscription(string loginId, Plan plan, string email)
+        public void CreateSubscription(string loginId, Plan plan, string email)
         {
             switch (plan)
             {
@@ -31,7 +31,7 @@ namespace tinder4apartment.Repo
                         PropertyLimit = 20,
                         Email = email
                     });
-                    await _db.SaveChangesAsync();
+                    _db.SaveChanges();
                     break;
                 case Plan.Pro:
                     _db.SubModels.Add(new SubModel{
@@ -41,6 +41,7 @@ namespace tinder4apartment.Repo
                         PropertyLimit = 40,
                         Email = email
                     });
+                     _db.SaveChanges();
                     break;
                  case Plan.Premium:
                     _db.SubModels.Add(new SubModel{
@@ -50,18 +51,25 @@ namespace tinder4apartment.Repo
                         PropertyLimit = int.MaxValue,
                         Email = email
                     });
+                    _db.SaveChanges();
                     break;
                 default:
                     break;
             }
         }
 
-        public void DowngradePlan(string loginId, Plan newPlan)
+        public void ChangePlan(string loginId, Plan newPlan)
         {
+            Dictionary<Plan, int> subscription = new Dictionary<Plan, int>();
+            subscription.Add(Plan.Business, 20);
+            subscription.Add(Plan.Premium, int.MaxValue);
+            subscription.Add(Plan.Pro, 40);
+
             var subscriptions = _db.SubModels.Where( m=> m.LoginId.Contains(loginId)).AsNoTracking().ToList();
             foreach (var item in subscriptions)
             {
                 item.Plan = newPlan;
+                item.PropertyLimit = subscription[newPlan];
             }
 
             _db.SubModels.UpdateRange(subscriptions);

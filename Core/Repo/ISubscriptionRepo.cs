@@ -9,7 +9,7 @@ namespace tinder4apartment.Repo
         bool HasItExpired(string loginId);
         bool HasPropertyLimitReached(string loginId);
         void UpgradePlan(string loginId, Plan newPlan);
-        void DowngradePlan(string loginId, Plan newPlan);
+        void ChangePlan(string loginId, Plan newPlan);
 
         void RenewSubscription(string loginId);
     }

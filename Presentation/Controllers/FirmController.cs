@@ -326,14 +326,14 @@ namespace tinder4apartment.Controllers
         [HttpGet("downgrade/plan/{loginId}/{newPlan}")]
         public IActionResult DowngradePlan(string loginId, Plan newPlan)
         {
-            _sub.DowngradePlan(loginId, newPlan);
+            _sub.ChangePlan(loginId, newPlan);
             return Ok("Subscription has been downgraded");
         }
 
         [HttpGet("upgrade/plan/{loginId}/{newPlan}")]
         public IActionResult UpgradePlan(string loginId, Plan newPlan)
         {
-            _sub.UpgradePlan(loginId, newPlan);
+            _sub.ChangePlan(loginId, newPlan);
             return Ok("Subscription has been upgraded");
         }
 

@@ -15,5 +15,9 @@ namespace server.Core.Repo
         public Task<List<SearchQueryLog>> GetSearchQueryLogs();
 
         public List<GoForCheckOrRedirectDTO> GetProviderActionCheckorRedirect(); 
+
+        public string AdminLogin(string userName, string Password);
+
+    
     }
 }
