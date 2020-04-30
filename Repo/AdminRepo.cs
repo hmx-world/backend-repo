@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using server.Core.Models;
 using tinder4apartment.Data;
@@ -16,9 +17,11 @@ namespace server.Core.Repo
     public class AdminRepo : IAdminRepo
     {
         private readonly PropertyDbContext _db;
-        public AdminRepo(PropertyDbContext db)
+        private readonly IConfiguration _config;
+        public AdminRepo(PropertyDbContext db, IConfiguration configuration)
         {
             _db = db;
+            _config =configuration;
         }
         public async Task<List<FirmDetailsDTO>> GetAllFirms()
         {
@@ -216,8 +219,9 @@ namespace server.Core.Repo
          public string GenerateToken(string userName, string Role)
         {
             //generate token
+            var tokenKey = _config.GetSection("AppSettings").GetValue<String>("Token");
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("SOME RANDOM WORD FOR TOKEN GENERATION");
+            var key = Encoding.ASCII.GetBytes(tokenKey);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[] { 

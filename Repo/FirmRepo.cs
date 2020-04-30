@@ -202,8 +202,9 @@ namespace tinder4apartment.Repo
          public string GenerateToken(Firm userData)
         {
             //generate token
+            var tokenKey = _config.GetSection("BlobSettings").GetValue<String>("AccessKey");
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("SOME RANDOM WORD FOR TOKEN GENERATION");
+            var key = Encoding.ASCII.GetBytes(tokenKey);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[] { 

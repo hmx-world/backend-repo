@@ -138,9 +138,6 @@ C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Debug\netcore
 C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Debug\netcoreapp3.1\publish\publish\tinder4apartment.runtimeconfig.json
 C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Debug\netcoreapp3.1\publish\tinder4apartment.deps.json
 C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Debug\netcoreapp3.1\publish\tinder4apartment.runtimeconfig.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Debug\netcoreapp3.1\Presentation\appsettings.Development.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Debug\netcoreapp3.1\Presentation\appsettings.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Debug\netcoreapp3.1\Presentation\Properties\launchSettings.json
 C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Debug\netcoreapp3.1\tinder4apartment.exe
 C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Debug\netcoreapp3.1\tinder4apartment.deps.json
 C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Debug\netcoreapp3.1\tinder4apartment.runtimeconfig.json
@@ -208,3 +205,13 @@ C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\obj\Debug\netcore
 C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\obj\Debug\netcoreapp3.1\tinder4apartment.csproj.CopyComplete
 C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\obj\Debug\netcoreapp3.1\tinder4apartment.dll
 C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\obj\Debug\netcoreapp3.1\tinder4apartment.pdb
+C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\Presentation\obj\Debug\netcoreapp3.1\tinder4apartment.csprojAssemblyReference.cache
+C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\Presentation\obj\Debug\netcoreapp3.1\staticwebassets\tinder4apartment.StaticWebAssets.Manifest.cache
+C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\Presentation\obj\Debug\netcoreapp3.1\staticwebassets\tinder4apartment.StaticWebAssets.xml
+C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\Presentation\obj\Debug\netcoreapp3.1\tinder4apartment.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\Presentation\obj\Debug\netcoreapp3.1\tinder4apartment.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\Presentation\obj\Debug\netcoreapp3.1\tinder4apartment.dll
+C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\Presentation\obj\Debug\netcoreapp3.1\tinder4apartment.pdb
+C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Debug\netcoreapp3.1\appsettings.json

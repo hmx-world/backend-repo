@@ -8,9 +8,14 @@ namespace tinder4apartment.Repo
 {
     public class BlobRepo : IBlobRepo
     {
-       // private readonly IConfiguration _configuration;
-        string _accessKey = "DefaultEndpointsProtocol=https;AccountName=propertyb2bstorage;AccountKey=VGSs+KadJLDZTBt8uHfzPAYXeoew3CVdHUs9Ftons+7ds7kYt5s9xE9u9j+e8/HkcSZeuhtWU5hr6OasueH8RQ==;EndpointSuffix=core.windows.net";
-   
+       private readonly IConfiguration _configuration;
+     
+        //string _accessKey = "DefaultEndpointsProtocol=https;AccountName=propertyb2bstorage;AccountKey=VGSs+KadJLDZTBt8uHfzPAYXeoew3CVdHUs9Ftons+7ds7kYt5s9xE9u9j+e8/HkcSZeuhtWU5hr6OasueH8RQ==;EndpointSuffix=core.windows.net";
+
+        public BlobRepo(IConfiguration config)
+        {
+            _configuration = config;
+        }
         public void DeleteFileFromBlob(string fileUrl)
         {
             throw new NotImplementedException();
@@ -36,7 +41,8 @@ namespace tinder4apartment.Repo
         {
             try
             {
-                CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(_accessKey);
+                var blobKey = _configuration.GetSection("BlobSettings").GetValue<String>("AccessKey");
+                CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobKey);
                 CloudBlobClient cloudBlobClient = cloudStorageAccount.CreateCloudBlobClient();
                 string containerName = "tinder4apartmentuploads";
                 CloudBlobContainer cloudBlobContainer = cloudBlobClient.GetContainerReference(containerName);

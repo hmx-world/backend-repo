@@ -25,7 +25,7 @@ namespace tinder4apartment
 {
     public class Startup
     {
-        private string ConnectDbString = "Server=tcp:startup-server.database.windows.net,1433;Initial Catalog=tinder4apartment_db;Persist Security Info=False;User ID=startupadmin;Password=Adegoke1234#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -40,7 +40,7 @@ namespace tinder4apartment
         {
          
            services.AddDbContext<PropertyDbContext>(options =>
-                 options.UseSqlServer(ConnectDbString));
+                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // services.AddAuthentication(options => {
             //     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -78,9 +78,9 @@ namespace tinder4apartment
                 options.MultipartHeadersLengthLimit = int.MaxValue;
             });
 
-           
+            var token = Configuration.GetSection("AppSettings").GetValue<String>("Token");
 
-             var key = Encoding.ASCII.GetBytes("SOME RANDOM WORD FOR TOKEN GENERATION");
+             var key = Encoding.ASCII.GetBytes(token);
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
                 options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters {
                     ValidateIssuerSigningKey = true,
