@@ -103,44 +103,6 @@ c:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Release\netcoreapp3.1\
 c:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Release\netcoreapp3.1\publish\publish\publish\publish\publish\publish\publish\appsettings.json
 c:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Release\netcoreapp3.1\publish\publish\publish\publish\publish\publish\publish\tinder4apartment.deps.json
 c:\Users\hp\dotnet repos\propertyb2b\tinder4apartment\bin\Release\netcoreapp3.1\publish\publish\publish\publish\publish\publish\publish\tinder4apartment.runtimeconfig.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\publish\publish\publish\web.config
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\publish\publish\web.config
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\publish\web.config
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\web.config
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\web.config
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\web.config
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\web.config
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\appsettings.Development.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\appsettings.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\appsettings.Development.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\appsettings.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\appsettings.Development.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\appsettings.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\appsettings.Development.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\appsettings.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\publish\appsettings.Development.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\publish\appsettings.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\publish\publish\appsettings.Development.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\publish\publish\appsettings.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\publish\publish\publish\appsettings.Development.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\publish\publish\publish\appsettings.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\publish\publish\publish\tinder4apartment.deps.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\publish\publish\publish\tinder4apartment.runtimeconfig.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\publish\publish\tinder4apartment.deps.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\publish\publish\tinder4apartment.runtimeconfig.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\publish\tinder4apartment.deps.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\publish\tinder4apartment.runtimeconfig.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\tinder4apartment.deps.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\publish\tinder4apartment.runtimeconfig.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\tinder4apartment.deps.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\publish\tinder4apartment.runtimeconfig.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\tinder4apartment.deps.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\publish\tinder4apartment.runtimeconfig.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\tinder4apartment.deps.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\tinder4apartment.runtimeconfig.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\Presentation\appsettings.Development.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\Presentation\appsettings.json
-C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\Presentation\Properties\launchSettings.json
 C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\tinder4apartment.exe
 C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\tinder4apartment.deps.json
 C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\tinder4apartment.runtimeconfig.json
@@ -208,3 +170,11 @@ C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\obj\Release\netco
 C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\obj\Release\netcoreapp3.1\tinder4apartment.csproj.CopyComplete
 C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\obj\Release\netcoreapp3.1\tinder4apartment.dll
 C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\obj\Release\netcoreapp3.1\tinder4apartment.pdb
+C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\appsettings.Development.json
+C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\Properties\launchSettings.json
+C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\appsettings.json
+C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\appsettings.Development.json
+C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\appsettings.json
+C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\web.config
+C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\tinder4apartment.deps.json
+C:\Users\hp\dotnet repos\work projects\hmx\hmxworld-app\server\bin\Release\netcoreapp3.1\publish\tinder4apartment.runtimeconfig.json
